@@ -1,0 +1,16 @@
+<% include partials/header  %>
+<% include partials/navigation %>
+    <main class="main">
+        <section class="gallery flex flex--row">
+            <% galleryImages.forEach( (galleryImage) => { %>
+                <div class="gallery__item">
+                    <article class="gallery-image">
+                        <img class="gallery-image__img" src="<%= galleryImage.src %>" alt="<%= galleryImage.desc %>">
+                        <h2 class="gallery__title"><%= galleryImage.id %></h2>
+                    </article>
+                </div>
+            <% }); %>
+        </section>
+    </main>
+
+<% include partials/footer  %>
