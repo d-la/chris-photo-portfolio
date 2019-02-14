@@ -1,0 +1,99 @@
+.nav{
+    font-size: 1.1em;
+    background: rgba($color-white, 1);
+    border: 1px solid rgba(0,0,0, .2);
+    padding-bottom: .95em;
+    box-shadow: 0 .1em 1em rgba(0,0,0, .15);
+    animation: fadeIn .9s linear;
+
+    &__logo{
+        display: inline-block;
+        font-size: 1em;
+        margin: .5em 0 0 .9em;
+        width: 2em;
+        height: 2em;
+        text-decoration: none;
+        border-radius: 3px;
+        background-image: linear-gradient(to right bottom, #2376ae 0%, #c16ecf 100%);
+
+        &-name{
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            width: 100%;
+            color: $color-white;
+        }
+
+        &:hover{
+            background-image: linear-gradient(to right bottom,#c16ecf 10%,#2376ae 100%);
+            animation: background-image .9s ease-in-out;
+        }
+    }
+
+    &__toggle{
+        position: absolute;
+        top: 1em;
+        right: 1.2em;
+        cursor: pointer;
+        font-size: 1em;
+
+        &:hover{
+            opacity: .7;
+        }
+    }
+
+    &__list{
+        list-style-type: none;
+        display: none;
+
+        &--active{
+            display: block;
+            animation: dropDown .4s ease-in-out;
+        }
+    }
+
+    &__item{
+        text-align: center;
+        margin: 1em auto;
+    }
+
+    &__links{
+        text-decoration: none;
+        color: #000;
+        font-size: .9em;
+    }
+}
+
+@media screen and (min-width: 786px){
+    .nav{
+        display: flex;
+        justify-content: space-between;
+        padding-bottom: 0;
+        height: 3.125em;
+        align-items: center;
+
+        &__list{
+            display: flex;
+            margin-right: 1em;
+            flex-direction: row;
+            justify-content: flex-end;
+        }
+
+        &__item{
+            margin: 0;
+        }
+
+        &__links{
+            margin-left: 2em;
+        }
+
+        &__logo{
+            margin-top: 0;
+        }
+
+        &__toggle{
+            display: none;
+        }
+    }
+}

@@ -1,0 +1,16 @@
+.welcome{
+    display: block;
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    background: linear-gradient(to right bottom, rgba(0,0,0, .4), rgba(0,0,0, .6)), url('/img/img1.jpg');
+    background-size: cover;
+    background-position: center;
+
+    animation: fadeIn .9s linear;
+
+    // &__img{
+
+    //     animation: fadeIn .9s linear;
+    // }
+}

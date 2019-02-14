@@ -1,0 +1,21 @@
+@supports (display: flex){
+    .flex{
+        display: flex;
+
+        &--row{
+            flex-direction: row;
+        }
+
+        &--col{
+            flex-direction: column;
+        }
+
+        &--row-r{
+            flex-direction: row-reverse;
+        }
+
+        &--col-r{
+            flex-direction: column-reverse;
+        }
+    }
+}

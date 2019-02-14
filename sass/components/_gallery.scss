@@ -1,0 +1,8 @@
+.gallery{
+    width: 100%;
+
+    &__item{
+        flex: 0 0 25%;
+        max-width: 15em;
+    }
+}
