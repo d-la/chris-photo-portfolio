@@ -1,0 +1,4 @@
+
+# ignore css map files
+public/css/styles.css.map
+public/css/styles.min.css.map
