@@ -1,4 +1,7 @@
 
+# ignore node_modules
+node_modules/*
+
 # ignore css map files
 public/css/styles.css.map
 public/css/styles.min.css.map
