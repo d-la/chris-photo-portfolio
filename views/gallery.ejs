@@ -48,7 +48,9 @@
             <% galleryImages.forEach( (galleryImage) => { %>
                 <div class="gallery__item">
                     <article class="gallery-image">
-                        <img class="gallery-image__img" src="<%= galleryImage.src %>" alt="<%= galleryImage.desc %>">
+                        <a href="/gallery/<%= galleryImage.id %>">
+                            <img class="gallery-image__img" src="<%= galleryImage.src %>" alt="<%= galleryImage.desc %>">
+                        </a>
                         <h2 class="gallery-image__title"><%= galleryImage.title %></h2>
                     </article>
                 </div>
