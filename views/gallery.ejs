@@ -1,12 +1,55 @@
 <% include partials/header  %>
 <% include partials/navigation %>
     <main class="main">
-        <section class="gallery flex flex--row">
+
+        <section class="albums">
+            <h1 class="albums__title">Albums</h1>
+            <ul class="albums__list flex flex--row">
+                <li class="albums__item">
+                    <a href="#" class="albums__link">
+                        All
+                        <span class="albums__slider"></span>
+                    </a>
+                </li>
+                <li class="albums__item">
+                    <a href="#" class="albums__link albums__link--active">
+                        Iceland
+                        <span class="albums__slider"></span>
+                    </a>
+                </li>
+                <li class="albums__item">
+                    <a href="#" class="albums__link">
+                        New York
+                        <span class="albums__slider"></span>
+                    </a>
+                </li>
+                <li class="albums__item">
+                    <a href="#" class="albums__link">
+                        People
+                        <span class="albums__slider"></span>
+                    </a>
+                </li>
+                <li class="albums__item">
+                    <a href="#" class="albums__link">
+                        Places
+                        <span class="albums__slider"></span>
+                    </a>
+                </li>
+                <li class="albums__item">
+                    <a href="#" class="albums__link">
+                        Things
+                        <span class="albums__slider"></span>
+                    </a>
+                </li>
+            </ul>
+        </section>
+
+        <section class="gallery grid grid--gallery grid--gap-1">
             <% galleryImages.forEach( (galleryImage) => { %>
                 <div class="gallery__item">
                     <article class="gallery-image">
                         <img class="gallery-image__img" src="<%= galleryImage.src %>" alt="<%= galleryImage.desc %>">
-                        <h2 class="gallery__title"><%= galleryImage.id %></h2>
+                        <h2 class="gallery-image__title"><%= galleryImage.title %></h2>
                     </article>
                 </div>
             <% }); %>
