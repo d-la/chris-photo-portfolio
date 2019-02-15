@@ -1,13 +1,4 @@
 .contact{
-    display: block;
-    position: relative;
-    height: calc(100% - 1.5em);
-    margin: 2em 0;
-
-    &__container{
-        max-width: 65em;
-        margin: 0 auto;
-    }
 
     &__information,
     &__form{
@@ -24,4 +15,22 @@
         padding: 0 1em;
     }
 
+}
+
+@media screen and (max-width: 768px){
+    .contact{
+        .flex--row{
+            flex-flow: column;
+            flex-wrap: nowrap;
+        }
+
+        &__information{
+            border-right: none;
+        }
+
+        &__form{
+            margin: 1em;
+            padding: 0 1em;
+        }
+    }
 }
