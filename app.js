@@ -26,6 +26,10 @@ app.get('/', (req, res) => {
     res.render('index');
 });
 
+app.get('/login', (req, res) => {
+    res.render('login');
+});
+
 app.get('/gallery', (req, res) => {
     // Should be fetched frm mysql database later
     const galleryImages = [
