@@ -88,6 +88,13 @@ body {
     }
   }
 }
+.main {
+  display: block;
+  max-width: 65em;
+  margin: 2em auto;
+  padding: 0 1em 2em;
+}
+
 .albums {
   display: block;
   position: relative;
@@ -336,23 +343,6 @@ body {
   padding: 0 2em;
 }
 
-.main {
-  display: block;
-  max-width: 75em;
-  margin: 2em auto;
-  padding: 0 2em 2em;
-}
-
-.contact {
-  display: block;
-  position: relative;
-  height: calc(100% - 1.5em);
-  margin: 2em 0;
-}
-.contact__container {
-  max-width: 65em;
-  margin: 0 auto;
-}
 .contact__information, .contact__form {
   flex: 1 1 0;
 }
@@ -363,6 +353,20 @@ body {
   border-right: 1px solid #ced4da;
   margin: 1em;
   padding: 0 1em;
+}
+
+@media screen and (max-width: 768px) {
+  .contact .flex--row {
+    flex-flow: column;
+    flex-wrap: nowrap;
+  }
+  .contact__information {
+    border-right: none;
+  }
+  .contact__form {
+    margin: 1em;
+    padding: 0 1em;
+  }
 }
 
 /*# sourceMappingURL=styles.css.map */
