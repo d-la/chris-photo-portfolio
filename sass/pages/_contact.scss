@@ -1,0 +1,27 @@
+.contact{
+    display: block;
+    position: relative;
+    height: calc(100% - 1.5em);
+    margin: 2em 0;
+
+    &__container{
+        max-width: 65em;
+        margin: 0 auto;
+    }
+
+    &__information,
+    &__form{
+        flex: 1 1 0;
+    }
+
+    &__form{
+        padding: 1em;
+    }
+
+    &__information{
+        border-right: 1px solid $bootstrap-grey;
+        margin: 1em;
+        padding: 0 1em;
+    }
+
+}

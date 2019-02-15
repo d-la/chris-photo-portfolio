@@ -1,0 +1,33 @@
+.form{
+
+    &-group{
+        display: block;
+        margin: .75em 0;
+    }
+
+    &-label{
+        display: inline-block;
+        margin-bottom: .5em;
+    }
+
+    &-control{
+        display: block;
+        width: 100%;
+        background-color: #FFF;
+        border: 1px solid $bootstrap-grey;
+        color: #000;
+        font-size: 1em;
+        font-weight: normal;
+        padding: 0 .625em;
+        height: calc(1.5em + .75rem + 2px);
+        line-height: 1.5;
+        border-radius: .25em;
+        overflow: visible;
+
+        box-sizing: border-box;
+
+        &--textarea{
+            height: 8em;
+        }
+    }
+}
