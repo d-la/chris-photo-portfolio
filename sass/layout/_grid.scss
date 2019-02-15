@@ -2,6 +2,39 @@
     .grid{
         display: grid;
 
-        
+        &--gallery{
+            grid-template-columns: repeat(3, minmax(12.5em, 1fr));
+            grid-template-rows: max-content;
+        }
+
+        &--gap-1{
+            grid-gap: 1em;
+        }
+
+        &--gap-2{
+            grid-gap: 2em;
+        }
+
+        &--gap-3{
+            grid-gap: 3em;
+        }
+    }
+
+    @media screen and (max-width: 1100px){
+        .grid{
+
+            &--gallery{
+                grid-template-columns: repeat(2, minmax(12.5em, 1fr));
+            }
+        }
+    }
+
+    @media screen and (max-width: 768px){
+        .grid{
+
+            &--gallery{
+                grid-template-columns: repeat(1, minmax(12.5em, 1fr));
+            }
+        }
     }
 }
