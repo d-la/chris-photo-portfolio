@@ -1,0 +1,49 @@
+.albums{
+    display: block;
+    position: relative;
+    padding: 1em 3em;
+
+    &__title{
+        text-align: center;
+        font-size: 1.1em;
+        font-weight: 400;
+    }
+
+    &__list{
+        list-style-type: none;
+        justify-content: center;
+        margin: 1em 0;
+    }
+
+    &__item{
+        flex: 0 0 15%;
+        text-align: center;
+    }
+
+    &__link{
+        position: relative;
+        text-decoration: none;
+        color: #000;
+        transition: all .3s ease-in-out;
+
+        &:hover .albums__slider{
+            width: 100%;
+        }
+
+        &--active{
+            border-bottom: 3px solid $color-green;
+        }
+    }
+
+    &__slider{
+        position: absolute;
+        display: block;
+        left: 0;
+        top: 89%;
+        margin: 0 auto;
+        height: 3px;
+        background-color: $color-green;
+        width: 0%;
+        transition: width .4s ease;
+    }
+}
