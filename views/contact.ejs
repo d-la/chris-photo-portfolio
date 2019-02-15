@@ -1,0 +1,40 @@
+<% include partials/header  %>
+<% include partials/navigation %>
+
+    <main class="contact">
+        <section class="contact__container">
+            <div class="flex flex--row">
+                <div class="contact__information">
+                    <h1>24 Year Old photographer based out of New York City</h1>
+                    <p>With a passion for sharing and exploring, each picture allows me to share a piece of my life with the world.</p>
+                    <p>Whether it be the furthest beaches of Iceland, the tallest mountains of New Hampshire, or the grandest buildings in New York City, each location brings something new to experience.</p>
+                </div>
+                <div class="contact__form">
+                    <h1>Contact Me</h1>
+                    <form action="/contact" method="POST" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" name="name" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" name="email" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="phoneNumber" class="form-label">Phone Number</label>
+                            <input type="phoneNumber" name="phoneNumber" placeholder="000-000-0000" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="message" class="form-label">Message</label>
+                            <textarea name="message" class="form-control form-control--textarea"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn--normal">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+<% include partials/footer  %>
