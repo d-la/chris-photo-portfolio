@@ -58,6 +58,38 @@ body {
     flex-direction: column-reverse;
   }
 }
+@supports (display: grid) {
+  .grid {
+    display: grid;
+  }
+}
+.btn {
+  display: inline-block;
+  position: relative;
+  font-size: 0.8em;
+  padding: 1em 2em;
+  text-align: center;
+  border-radius: 10em;
+  margin: 1em 0;
+  transition: all 0.2s;
+  text-decoration: none;
+}
+.btn--green {
+  background-image: linear-gradient(to right bottom, rgba(85, 197, 122, 0.9), rgba(40, 180, 133, 0.7));
+  border: 1px solid #55c57a;
+  color: #FFF;
+  font-weight: 600;
+}
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+.btn:hover::after {
+  transform: scaleX(1.4) scaleY(1.6);
+  opacity: 0;
+}
+
 .nav {
   font-size: 1.1em;
   background: white;
@@ -169,6 +201,14 @@ body {
   background-size: cover;
   background-position: center;
   animation: fadeIn 0.9s linear;
+}
+.welcome__message {
+  position: relative;
+  top: 30%;
+  text-align: center;
+  color: #FFF;
+  animation: fadeIn 0.9s linear;
+  padding: 0 2em;
 }
 
 .main {
