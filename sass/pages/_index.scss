@@ -9,8 +9,12 @@
 
     animation: fadeIn .9s linear;
 
-    // &__img{
-
-    //     animation: fadeIn .9s linear;
-    // }
+    &__message{
+        position: relative;
+        top: 30%;
+        text-align: center;
+        color: $color-white;
+        animation: fadeIn .9s linear;
+        padding: 0 2em;
+    }
 }

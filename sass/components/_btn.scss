@@ -1,0 +1,30 @@
+.btn{
+    display: inline-block;
+    position: relative;
+    font-size: .8em;
+    padding: 1em 2em;
+    text-align: center;
+    border-radius: 10em;
+    margin: 1em 0;
+    transition: all .2s;
+    text-decoration: none;
+
+    &--green{
+        background-image: linear-gradient(to right bottom, rgba($color-green, .9), rgba($color-green-dark, .7));
+        // border-image: linear-gradient(to left, rgba($color-green, .9), rgba($color-green-dark, .7));
+        border: 1px solid $color-green;
+        color: $color-white;
+        font-weight: 600;
+    }
+
+    &:hover{
+        transform: translateY(-3px);
+        box-shadow: 0 .5rem 1rem rgba($color-black, .2);
+        cursor: pointer;
+
+        &::after{
+          transform: scaleX(1.4) scaleY(1.6);
+          opacity: 0;
+        }
+    }
+}
