@@ -74,6 +74,10 @@ app.get('/gallery', (req, res) => {
     res.render('gallery', {galleryImages: galleryImages});
 });
 
+app.get('/contact', (req, res) => {
+    res.render('contact');
+});
+
 app.listen(4200, 'localhost', () => {
     console.log('Server is running!');
 });
