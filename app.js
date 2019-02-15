@@ -1,6 +1,7 @@
 let express = require('express'),
 bodyParser = require('body-parser')
-path = require('path');
+path = require('path'),
+expressSanitizer = require('express-sanitizer');
 
 const app = express();
 const http = require('http');
@@ -8,6 +9,7 @@ const http = require('http');
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(expressSanitizer());
 
 let mysql = require('mysql');
 
