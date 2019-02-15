@@ -1,7 +1,7 @@
 .nav{
     font-size: 1.1em;
     background: rgba($color-white, 1);
-    border: 1px solid rgba(0,0,0, .2);
+    border-bottom: 1px solid rgba(0,0,0, .2);
     padding-bottom: .95em;
     box-shadow: 0 .1em 1em rgba(0,0,0, .15);
     animation: fadeIn .9s linear;
@@ -27,7 +27,7 @@
 
         &:hover{
             background-image: linear-gradient(to right bottom,#c16ecf 10%,#2376ae 100%);
-            animation: background-image .9s ease-in-out;
+            transition: background-image .9s ease-in-out;
         }
     }
 
