@@ -29,23 +29,44 @@ app.get('/gallery', (req, res) => {
     const galleryImages = [
         {
             id: 1,
-            src: '/img/img1.jpg',
-            title: '',
-            desc: '',
+            src: '/img/img4.jpg',
+            title: 'Mountain in Ireland',
+            desc: 'Sunset hitting the mountains in Ireland',
             dateTaken: ''
         },
         {
             id: 2,
             src: '/img/img2.jpg',
-            title: '',
-            desc: '',
+            title: 'The Galaxy in Iceland',
+            desc: 'At dusk, the milky way and stars of the universe',
             dateTaken: ''
         },
         {
             id: 3,
             src: '/img/img3.jpg',
-            title: '',
-            desc: '',
+            title: 'Frozen lake in Iceland',
+            desc: 'Taken at lake Something in Iceland',
+            dateTaken: ''
+        },
+        {
+            id: 4,
+            src: '/img/img4.jpg',
+            title: 'Mountain in Ireland',
+            desc: 'Sunset hitting the mountains in Ireland',
+            dateTaken: ''
+        },
+        {
+            id: 5,
+            src: '/img/img2.jpg',
+            title: 'The Galaxy in Iceland',
+            desc: 'At dusk, the milky way and stars of the universe',
+            dateTaken: ''
+        },
+        {
+            id: 6,
+            src: '/img/img3.jpg',
+            title: 'Frozen lake in Iceland',
+            desc: 'Taken at lake Something in Iceland',
             dateTaken: ''
         }
     ];
