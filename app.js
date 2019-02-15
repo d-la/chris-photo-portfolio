@@ -78,6 +78,23 @@ app.get('/contact', (req, res) => {
     res.render('contact');
 });
 
+app.get('/gallery/:id', (req, res) => {
+    const galleryImageId = req.params.id;
+
+    // TODO: Implement logic to fetch data for the gallery image and it's album, if any,
+    // and return it to the page. This way we can display the gallery image and any other 
+    // images within the album
+
+    const galleryData = {
+        galleryImageId: galleryImageId,
+        galleryImageSrc: '/img/img4.jpg',
+        albumId: -1,
+        associatedGalleryImages: [2, 3, 4, 5, 6]
+    };
+
+    res.render('view', {galleryData: galleryData});
+});
+
 app.listen(4200, 'localhost', () => {
     console.log('Server is running!');
 });

@@ -1,0 +1,15 @@
+.album{
+    position: relative;
+    display: block;
+    width: 100%;
+    margin: 2em auto;
+    height: 11em;
+
+    &__item{
+        min-width: 15%;
+
+        &--flex{
+            flex: 1;
+        }
+    }
+}

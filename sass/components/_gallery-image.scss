@@ -10,6 +10,10 @@
         height: 16em;
         object-fit: cover;
 
+        &--height-auto{
+            height: auto;
+        }
+
         &:hover{
             opacity: .7;
             cursor: pointer;
