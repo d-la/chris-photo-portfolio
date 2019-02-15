@@ -9,6 +9,12 @@
     transition: all .2s;
     text-decoration: none;
 
+    &--normal{
+        border-radius: 6px;
+        padding: .75em 3em;
+        border: 1px solid $bootstrap-grey;
+    }
+
     &--green{
         background-image: linear-gradient(to right bottom, rgba($color-green, .9), rgba($color-green-dark, .7));
         // border-image: linear-gradient(to left, rgba($color-green, .9), rgba($color-green-dark, .7));
