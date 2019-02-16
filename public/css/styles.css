@@ -19,6 +19,14 @@
     transform: translateY(0);
   }
 }
+@keyframes sidebarMOveInFromLeft {
+  0% {
+    transform: translateX(-10em);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
 *,
 *::after,
 *::before {
@@ -42,6 +50,16 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.dropdown-menu {
+  left: inherit !important;
+  right: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .dropdown-menu {
+    position: absolute !important;
+  }
+}
 @supports (display: flex) {
   .flex {
     display: flex;
@@ -86,6 +104,24 @@ body {
     .grid--gallery {
       grid-template-columns: repeat(1, minmax(12.5em, 1fr));
     }
+  }
+}
+.admin {
+  position: relative;
+  width: calc(100% - 15.625em);
+  margin-left: 15.625em;
+  height: 100%;
+  padding: 1.5em 2em 0;
+}
+.admin .page-title {
+  font-size: 1.3em;
+  padding: 0 15px;
+}
+
+@media screen and (max-width: 768px) {
+  .admin {
+    width: 100% !important;
+    margin-left: 0;
   }
 }
 .main {
@@ -152,7 +188,7 @@ body {
   transition: width 0.4s ease;
 }
 
-.btn {
+.button {
   display: inline-block;
   position: relative;
   font-size: 0.8em;
@@ -163,23 +199,23 @@ body {
   transition: all 0.2s;
   text-decoration: none;
 }
-.btn--normal {
+.button--normal {
   border-radius: 6px;
   padding: 0.75em 3em;
   border: 1px solid #ced4da;
 }
-.btn--green {
+.button--green {
   background-image: linear-gradient(to right bottom, rgba(85, 197, 122, 0.9), rgba(40, 180, 133, 0.7));
   border: 1px solid #55c57a;
   color: #FFF;
   font-weight: 600;
 }
-.btn:hover {
+.button:hover {
   transform: translateY(-3px);
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
   cursor: pointer;
 }
-.btn:hover::after {
+.button:hover::after {
   transform: scaleX(1.4) scaleY(1.6);
   opacity: 0;
 }
@@ -339,6 +375,122 @@ body {
 }
 .form-control--textarea {
   height: 8em;
+}
+
+.sidebar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 15.625em;
+  height: 100%;
+  background-color: #FFF;
+  padding: 3em 1em 1em;
+  z-index: 5;
+  border-right: 1px solid #ced4da;
+  box-shadow: 0.1em 0 1em rgba(0, 0, 0, 0.15);
+}
+.sidebar--open-mobile {
+  animation: sidebarMoveInFromLeft 0.2s;
+  left: 0 !important;
+  z-index: 11;
+}
+.sidebar__user-info {
+  display: block;
+  padding: 1em 0;
+  margin: 0;
+  border-bottom: 1px solid #000;
+}
+.sidebar__list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.sidebar__link {
+  display: block;
+  padding: 0.55em;
+  color: #000;
+  margin: 0.75em 0;
+  font-size: 0.85em;
+}
+.sidebar__link:hover {
+  border-radius: 5px;
+  background-color: #ced4da;
+  color: #000;
+  text-decoration: none;
+}
+
+@media screen and (max-width: 768px) {
+  .sidebar {
+    left: -15.625em;
+  }
+}
+.navbar {
+  z-index: 8;
+  background: #FFF !important;
+  border-bottom: 1px solid #ced4da;
+  box-shadow: 0 0.1em 1em rgba(0, 0, 0, 0.15);
+}
+.navbar--toggler {
+  display: none;
+  padding: 0.25em 0.75em;
+  font-size: 1.25em;
+  line-height: 1;
+  background-color: transparent;
+  border: 1px solid transparent;
+  border-radius: 0.25em;
+  color: rgba(0, 0, 0, 0.5);
+  border-color: rgba(0, 0, 0, 0.1);
+}
+.navbar--toggler:hover {
+  cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  .navbar--toggler {
+    display: block;
+  }
+  .navbar--custom {
+    flex: 0 0 100%;
+    text-align: right;
+  }
+}
+.user__name {
+  display: block;
+}
+.user__type {
+  display: block;
+  font-size: 0.85em;
+}
+
+.panel {
+  position: relative;
+  display: block;
+  width: 100%;
+  margin: 1em 0;
+  border-radius: 4px;
+  background-color: #FFF;
+}
+.panel__header {
+  position: relative;
+  display: block;
+  background-color: #282c34;
+  padding: 0.25em 0.75em;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  color: #FFF;
+  font-size: 0.95em;
+}
+.panel__body {
+  position: relative;
+  display: block;
+  padding: 0.75em;
+  border-right: 1px solid #ced4da;
+  border-left: 1px solid #ced4da;
+  border-bottom: 1px solid #ced4da;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  font-size: 0.9em;
 }
 
 .welcome {
