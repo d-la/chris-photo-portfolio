@@ -1,0 +1,20 @@
+// Admin backend styles
+.admin{
+    position: relative;
+    width: calc(100% - 15.625em);
+    margin-left: 15.625em;
+    height: 100%;
+    padding: 1.5em 2em 0;
+
+    .page-title{
+        font-size: 1.3em;
+        padding: 0 15px;
+    }
+}
+
+@media screen and (max-width: 768px){
+    .admin{
+        width: 100% !important;
+        margin-left: 0;
+    }
+}

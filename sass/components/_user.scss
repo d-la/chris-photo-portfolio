@@ -1,0 +1,11 @@
+// Admin backend styles
+.user{
+    &__name{
+        display: block;
+    }
+
+    &__type{
+        display: block;
+        font-size: .85em;
+    }
+}

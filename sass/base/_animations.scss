@@ -26,3 +26,13 @@
         transform: translateY(0);
     }
 }
+
+@keyframes sidebarMOveInFromLeft{
+    0%{
+        transform: translateX(-10em);
+    }
+
+    100%{
+        transform: translateX(0);
+    }
+}

@@ -1,0 +1,54 @@
+// Admin backend styles
+.sidebar{
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 15.625em;
+    height: 100%;
+    background-color: #FFF;
+    padding: 3em 1em 1em;
+    z-index: 5;
+    border-right: 1px solid $bootstrap-grey;
+    box-shadow: .1em 0 1em rgba(0,0,0,.15);
+
+    &--open-mobile{
+        animation: sidebarMoveInFromLeft .2s;
+        left: 0 !important;
+        z-index: 11;
+    }
+
+    &__user-info{
+        display: block;
+        padding: 1em 0;
+        margin: 0;
+        border-bottom: 1px solid #000;
+    }
+
+    &__list{
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    &__link{
+        display: block;
+        padding: .55em;
+        color: #000;
+        margin: .75em 0;
+        font-size: .85em;
+
+        &:hover{
+            border-radius: 5px;
+            background-color: $bootstrap-grey;
+            color: #000;
+            text-decoration: none;
+        }
+    }
+}
+
+@media screen and (max-width: 768px){
+    .sidebar{
+        left: -15.625em;
+    }
+}
