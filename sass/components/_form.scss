@@ -1,16 +1,16 @@
 .form{
 
-    &-group{
+    &__group{
         display: block;
         margin: 1em 0;
     }
 
-    &-label{
+    &__label{
         display: inline-block;
         margin-bottom: .5em;
     }
 
-    &-control{
+    &__control{
         display: block;
         width: 100%;
         background-color: #FFF;
