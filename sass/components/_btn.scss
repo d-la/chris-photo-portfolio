@@ -1,0 +1,12 @@
+// Used to add or override styles of bootstrap
+.btn{
+
+    &--black{
+        background: $react-black !important;
+        color: #FFF !important;
+
+        &:hover{
+            opacity: .7;
+        }
+    }
+}
