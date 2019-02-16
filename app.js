@@ -21,6 +21,10 @@ const connection = mysql.createConnection({
 });
 
 
+/**
+ * Front end routes
+ */
+
 // Root (index) page
 app.get('/', (req, res) => {
     res.render('index');
@@ -99,6 +103,22 @@ app.get('/gallery/:id', (req, res) => {
     };
 
     res.render('view', {galleryData: galleryData});
+});
+
+/**
+ * Back end routes
+ */
+
+app.get('/admin/dashboard', (req, res) => {
+    res.render('admin/dashboard');
+});
+
+app.get('/admin/albums', (req, res) => {
+    res.render('admin/albums');
+});
+
+app.get('/admin/images', (req, res) => {
+    res.render('admin/images');
 });
 
 app.listen(4200, 'localhost', () => {
