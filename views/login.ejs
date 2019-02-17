@@ -9,16 +9,16 @@
                 Christopher Dinh's Photography Portfolio Admin Portal
             </h1>
             <div class="login__form">
-                <form>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Email address</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                <form action="/login" method="POST" enctype="application/x-www-form-urlencoded" class="form">
+                    <div class="form__group">
+                        <label for="user[email]">Email address</label>
+                        <input type="email" class="form__control" id="user[email]" aria-describedby="user[email]" name="email" placeholder="Enter email">
                     </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Password</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                    <div class="form__group">
+                        <label for="user[password]">Password</label>
+                        <input type="password" class="form__control" id="user[password]" name="password" placeholder="Password">
                     </div>
-                    <button type="submit" class="btn btn--normal">Log In</button>
+                    <button type="submit" class="button button--normal">Log In</button>
                 </form>
             </div>
             <p class="login__copyright">
