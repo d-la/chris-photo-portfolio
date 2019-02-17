@@ -1,23 +1,24 @@
 let express = require('express'),
-bodyParser = require('body-parser')
-path = require('path'),
-expressSanitizer = require('express-sanitizer');
+    bodyParser = require('body-parser')
+    path = require('path'),
+    expressSanitizer = require('express-sanitizer'),
+    session = require('express-session'),
+    mysql = require('mysql')
+    bcrypt = require('bcrypt');
 
 const app = express();
-const http = require('http');
 
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(expressSanitizer());
 
-let mysql = require('mysql');
-
 const connection = mysql.createConnection({
     host:     'localhost',
     user:     'root',
     password: 'root',
-    database: 'photo_blog'
+    database: 'photo_blog',
+    port: 8889
 });
 
 
@@ -28,10 +29,6 @@ const connection = mysql.createConnection({
 // Root (index) page
 app.get('/', (req, res) => {
     res.render('index');
-});
-
-app.get('/login', (req, res) => {
-    res.render('login');
 });
 
 app.get('/gallery', (req, res) => {
@@ -108,6 +105,41 @@ app.get('/gallery/:id', (req, res) => {
 /**
  * Back end routes
  */
+
+// Show the login view
+app.get('/login', (req, res) => {
+    res.render('login');
+});
+
+// Handle the login page logic
+app.post('/login', (req, res) => {
+    const userData = {
+        email: req.body.email,
+        password: req.body.password,
+        password_hash: ''
+    };
+
+    // Logic to get password_hash from database
+    connection.connect();
+    connection.query(`SELECT id, first_name, last_name, email, password_hash FROM users WHERE email = '${userData.email}';`, (error, results, fields) => {
+        if (error){
+            console.log(error);
+            throw error;
+        } else {
+            if (results[0].password_hash !== undefined){
+                userData.password_hash = results[0].password_hash;
+            }
+        }
+    });
+    connection.end();
+
+    // userData.password_hash is not even assigned by the time we get here. need to take a look more into promises for mysql
+    bcrypt.compare(userData.password, userData.password_hash).then( (response) => {
+        if (response === true){
+            res.render('admin/dashboard');
+        }
+    });
+});
 
 app.get('/admin/dashboard', (req, res) => {
     res.render('admin/dashboard');
