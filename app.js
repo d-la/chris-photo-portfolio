@@ -4,7 +4,8 @@ let express = require('express'),
     expressSanitizer = require('express-sanitizer'),
     session = require('express-session'),
     mysql = require('mysql')
-    bcrypt = require('bcrypt');
+    bcrypt = require('bcrypt'),
+    User = require('./models/User');
 
 const app = express();
 
@@ -113,6 +114,9 @@ app.get('/login', (req, res) => {
 
 // Handle the login page logic
 app.post('/login', (req, res) => {
+
+    // TODO: encapsulate this into  class?
+
     const userData = {
         email: req.body.email,
         password: req.body.password,
@@ -126,19 +130,26 @@ app.post('/login', (req, res) => {
             console.log(error);
             throw error;
         } else {
+            // No errors found from executing query, find the password_hash for the user and assign that value to userData object
             if (results[0].password_hash !== undefined){
                 userData.password_hash = results[0].password_hash;
+                
+                // Use bcrypt library to compare the entered password to the users password_hash
+                bcrypt.compare(userData.password, userData.password_hash).then( (response) => {
+
+                    // Redirect the user to the admin backend
+                    if (response === true){
+                        res.redirect('admin/dashboard');
+                    }
+                }).catch( (error) => {
+                    console.log(error);
+
+                    res.redirect('login');
+                });
             }
         }
     });
     connection.end();
-
-    // userData.password_hash is not even assigned by the time we get here. need to take a look more into promises for mysql
-    bcrypt.compare(userData.password, userData.password_hash).then( (response) => {
-        if (response === true){
-            res.render('admin/dashboard');
-        }
-    });
 });
 
 app.get('/admin/dashboard', (req, res) => {
