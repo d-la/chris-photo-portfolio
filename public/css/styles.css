@@ -385,7 +385,7 @@ body {
   width: 15.625em;
   height: 100%;
   background-color: #FFF;
-  padding: 3em 1em 1em;
+  padding: 3.5em 1em 1em;
   z-index: 5;
   border-right: 1px solid #ced4da;
   box-shadow: 0.1em 0 1em rgba(0, 0, 0, 0.15);
@@ -397,7 +397,7 @@ body {
 }
 .sidebar__user-info {
   display: block;
-  padding: 1em 0;
+  padding: 1em 0.5em;
   margin: 0;
   border-bottom: 1px solid #000;
 }
