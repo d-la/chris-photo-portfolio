@@ -2,7 +2,8 @@ let express = require('express');
 let router = express.Router();
 
 let mysql = require('mysql'),
-    bcrypt = require('bcrypt');
+    bcrypt = require('bcrypt'),
+    mysqlDB = require('../models/MysqlDB.js');
 
 // const connection = mysql.createConnection({
 //     host:     'localhost',
@@ -37,33 +38,56 @@ router.post('/login', (req, res) => {
     };
 
     // Logic to get password_hash from database
-    const connection = mysql.createConnection(connectionInfo);
-    connection.connect();
-    connection.query(`SELECT id, first_name, last_name, email, password_hash FROM users WHERE email = '${userData.email}';`, (error, results, fields) => {
-        if (error){
-            console.log(error);
-            throw error;
-        } else {
-            // No errors found from executing query, find the password_hash for the user and assign that value to userData object
-            if (results[0].password_hash !== undefined){
-                userData.password_hash = results[0].password_hash;
+    // const connection = mysql.createConnection(connectionInfo);
+    // connection.connect();
+    // connection.query(`SELECT id, first_name, last_name, email, password_hash FROM users WHERE email = '${userData.email}';`, (error, results, fields) => {
+    //     if (error){
+    //         console.log(error);
+    //         throw error;
+    //     } else {
+    //         // No errors found from executing query, find the password_hash for the user and assign that value to userData object
+    //         if (results[0].password_hash !== undefined){
+    //             userData.password_hash = results[0].password_hash;
                 
-                // Use bcrypt library to compare the entered password to the users password_hash
-                bcrypt.compare(userData.password, userData.password_hash).then( (response) => {
+    //             // Use bcrypt library to compare the entered password to the users password_hash
+    //             bcrypt.compare(userData.password, userData.password_hash).then( (response) => {
 
-                    // Redirect the user to the admin backend
-                    if (response === true){
-                        res.redirect('admin/dashboard');
-                    }
-                }).catch( (error) => {
-                    console.log(error);
+    //                 // Redirect the user to the admin backend
+    //                 if (response === true){
+    //                     res.redirect('admin/dashboard');
+    //                 }
+    //             }).catch( (error) => {
+    //                 console.log(error);
 
-                    res.redirect('login');
-                });
-            }
+    //                 res.redirect('login');
+    //             });
+    //         }
+    //     }
+    // });
+    // connection.end();
+
+    const selectUserInfoQuery = `SELECT id, first_name, last_name, email, password_hash FROM users WHERE email = '${userData.email}';`;
+
+    mysqlDB.initializeConnection(connectionInfo);
+
+    mysqlDB.executeQuery(selectUserInfoQuery).then( (results) => {
+        if (results[0].password_hash !== undefined){
+            userData.password_hash = results[0].password_hash;
+
+            bcrypt.compare(userData.password, userData.password_hash).then( (response) => {
+                // Redirect the user to the admin backend
+                if (response === true){
+                    res.redirect('admin/dashboard');
+                }
+            }).catch( (error) => {
+                res.redirect('login');
+            });
         }
+    }).then( (results) => {
+        mysqlDB.closeConnection()
+    }).catch( (error) => {
+        console.log(error);
     });
-    connection.end();
 });
 
 router.get('/admin/dashboard', (req, res) => {
