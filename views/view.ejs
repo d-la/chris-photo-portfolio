@@ -15,15 +15,22 @@
             <p>Published: <%= allImageData[0].image_date_added %></p>
         </section>
 
-        <section class="album">
+        <section class="featured-images">
             <h3>Explore photos from other albums:</h3>
 
-            <div class="flex flex--row flex--nowrap" style="height:100%;">
-                <% allImageData.forEach( (albumImage) => { %>
-                    <a href="/gallery/<%= albumImage.image_id %>" class="album__item album__item--flex">
-                        <img class="album__img" src="<%= albumImage.src %>" alt="<%= albumImage.image_description %>" />
+            <div class="flex flex--row flex--nowrap featured-images__container">
+                <% 
+                let count = 0;
+                allImageData.forEach( (albumImage) => { 
+                    
+                    if ((count > 0) && (count < 6)){ %>
+                    <a href="/gallery/<%= albumImage.image_id %>" class="featured-images__item featured-images__item--flex">
+                        <img class="featured-images__img" src="<%= albumImage.src %>" alt="<%= albumImage.image_description %>" />
                     </a>
-                <% }); %>
+                <% 
+                    }
+                    count++;
+                }); %>
             </div>
         </section>
     </main>
