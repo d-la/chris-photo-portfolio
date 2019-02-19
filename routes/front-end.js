@@ -1,59 +1,45 @@
 let express = require('express');
 let router = express.Router();
 
+let mysql = require('mysql'),
+    mysqlDB = require('../models/MysqlDB.js');
+
+const connectionInfo = {
+    host:     'localhost',
+    user:     'root',
+    password: 'root',
+    database: 'photo_blog',
+    port: 8889
+};
+
 // Root (index) page
 router.get('/', (req, res) => {
     res.render('index');
 });
 
 router.get('/gallery', (req, res) => {
-    // Should be fetched frm mysql database later
-    const galleryImages = [
-        {
-            id: 1,
-            src: '/img/img4.jpg',
-            title: 'Mountain in Ireland',
-            desc: 'Sunset hitting the mountains in Ireland',
-            dateTaken: ''
-        },
-        {
-            id: 2,
-            src: '/img/img2.jpg',
-            title: 'The Galaxy in Iceland',
-            desc: 'At dusk, the milky way and stars of the universe',
-            dateTaken: ''
-        },
-        {
-            id: 3,
-            src: '/img/img3.jpg',
-            title: 'Frozen lake in Iceland',
-            desc: 'Taken at lake Something in Iceland',
-            dateTaken: ''
-        },
-        {
-            id: 4,
-            src: '/img/img4.jpg',
-            title: 'Mountain in Ireland',
-            desc: 'Sunset hitting the mountains in Ireland',
-            dateTaken: ''
-        },
-        {
-            id: 5,
-            src: '/img/img2.jpg',
-            title: 'The Galaxy in Iceland',
-            desc: 'At dusk, the milky way and stars of the universe',
-            dateTaken: ''
-        },
-        {
-            id: 6,
-            src: '/img/img3.jpg',
-            title: 'Frozen lake in Iceland',
-            desc: 'Taken at lake Something in Iceland',
-            dateTaken: ''
-        }
-    ];
+    const selectAllAlbums = `SELECT id, title FROM albums;`;
+    const selectAllImages = `SELECT i.id AS image_id, i.src, i.title AS image_title, i.description AS image_description, i.album_id, i.date_added AS image_date_added, a.id, a.title AS image_album, a.location AS album_location FROM images i LEFT JOIN albums a ON i.album_id = a.id;`;
 
-    res.render('gallery', {galleryImages: galleryImages});
+    let albums, images;
+    mysqlDB.initializeConnection(connectionInfo);
+    mysqlDB.executeQuery(selectAllAlbums).then( (results) => {
+        albums = results;
+
+        return mysqlDB.executeQuery(selectAllImages);
+    }).then( (results) => {
+        images = results;
+
+        return mysqlDB.closeConnection();
+    }).then( (results) => {
+
+        res.render('gallery',{
+            albums: albums,
+            images: images
+        })
+    }).catch( (error) => {
+        console.log(error);
+    });
 });
 
 router.get('/contact', (req, res) => {
