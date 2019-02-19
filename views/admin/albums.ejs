@@ -15,18 +15,22 @@
                             <div class="table-responsive">
                                 <table class="table table-hover">
                                     <thead>
-                                        <th>Album Name</th>
+                                        <th>Album Title</th>
                                         <th>Album Description</th>
                                         <th>Date Added</th>
                                         <th>Actions</th>
                                     </thead>
                                     <tbody>
+                                        <% albums.forEach ( (album) => { %>
                                         <tr>
-                                            <td>Test</td>
-                                            <td>Test</td>
-                                            <td>Test</td>
-                                            <td>Test</td>
+                                            <td><%= album.title %></td>
+                                            <td><%= album.description %></td>
+                                            <td><%= album.date_added %></td>
+                                            <td>
+                                                <a href="/admin/albums/<%= album.id %>" class="btn btn--black">Edit</a>
+                                            </td>
                                         </tr>
+                                        <% }); %>
                                     </tbody>
                                 </table>
                             </div><!-- end .table-responsive -->
@@ -39,10 +43,10 @@
                             Add new album
                         </div>
                         <div class="panel__body">
-                            <form action="/contact" method="POST" enctype="multipart/form-data">
+                            <form action="/admin/albums" method="POST" enctype="application/x-www-form-urlencoded">
                                 <div class="form-group">
-                                    <label for="album[name]" class="form-label">Album Name</label>
-                                    <input type="text" name="album[name]" class="form-control" required="required">
+                                    <label for="album[title]" class="form-label">Album Title</label>
+                                    <input type="text" name="album[title]" class="form-control" required="required">
                                 </div>
                                 <div class="form-group">
                                     <label for="album[description]" class="form-label">Album Description</label>
@@ -59,7 +63,7 @@
                         </div><!-- end .panel__body -->
                     </div><!-- end .panel -->
                 </div><!-- end .col-lg-6 -->
-            </div>
-        </div>
-    </main>    
+            </div><!-- end .row -->
+        </div><!-- end .container-fluid -->
+    </main>
 <% include ./partials/footer  %>
