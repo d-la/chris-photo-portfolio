@@ -388,7 +388,6 @@ body {
   padding: 3.5em 1em 1em;
   z-index: 5;
   border-right: 1px solid #ced4da;
-  box-shadow: 0.1em 0 1em rgba(0, 0, 0, 0.15);
 }
 .sidebar--open-mobile {
   animation: sidebarMoveInFromLeft 0.2s;
@@ -416,8 +415,19 @@ body {
 .sidebar__link:hover {
   border-radius: 5px;
   background-color: #ced4da;
-  color: #000;
+  color: #2d353c;
   text-decoration: none;
+}
+.sidebar-end {
+  position: fixed;
+  z-index: 4;
+  background: #FFF;
+  width: 15.625em;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  border-right: 1px solid #ced4da;
+  box-shadow: 0.1em 0 1em rgba(0, 0, 0, 0.15);
 }
 
 @media screen and (max-width: 768px) {
