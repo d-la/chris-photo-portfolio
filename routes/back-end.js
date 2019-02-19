@@ -5,14 +5,6 @@ let mysql = require('mysql'),
     bcrypt = require('bcrypt'),
     mysqlDB = require('../models/MysqlDB.js');
 
-// const connection = mysql.createConnection({
-//     host:     'localhost',
-//     user:     'root',
-//     password: 'root',
-//     database: 'photo_blog',
-//     port: 8889
-// });
-
 const connectionInfo = {
     host:     'localhost',
     user:     'root',
@@ -37,35 +29,6 @@ router.post('/login', (req, res) => {
         password_hash: ''
     };
 
-    // Logic to get password_hash from database
-    // const connection = mysql.createConnection(connectionInfo);
-    // connection.connect();
-    // connection.query(`SELECT id, first_name, last_name, email, password_hash FROM users WHERE email = '${userData.email}';`, (error, results, fields) => {
-    //     if (error){
-    //         console.log(error);
-    //         throw error;
-    //     } else {
-    //         // No errors found from executing query, find the password_hash for the user and assign that value to userData object
-    //         if (results[0].password_hash !== undefined){
-    //             userData.password_hash = results[0].password_hash;
-                
-    //             // Use bcrypt library to compare the entered password to the users password_hash
-    //             bcrypt.compare(userData.password, userData.password_hash).then( (response) => {
-
-    //                 // Redirect the user to the admin backend
-    //                 if (response === true){
-    //                     res.redirect('admin/dashboard');
-    //                 }
-    //             }).catch( (error) => {
-    //                 console.log(error);
-
-    //                 res.redirect('login');
-    //             });
-    //         }
-    //     }
-    // });
-    // connection.end();
-
     const selectUserInfoQuery = `SELECT id, first_name, last_name, email, password_hash FROM users WHERE email = '${userData.email}';`;
 
     mysqlDB.initializeConnection(connectionInfo);
@@ -73,18 +36,22 @@ router.post('/login', (req, res) => {
     mysqlDB.executeQuery(selectUserInfoQuery).then( (results) => {
         if (results[0].password_hash !== undefined){
             userData.password_hash = results[0].password_hash;
-
-            bcrypt.compare(userData.password, userData.password_hash).then( (response) => {
-                // Redirect the user to the admin backend
-                if (response === true){
-                    res.redirect('admin/dashboard');
-                }
-            }).catch( (error) => {
-                res.redirect('login');
-            });
         }
     }).then( (results) => {
-        mysqlDB.closeConnection()
+        mysqlDB.closeConnection();
+
+        bcrypt.compare(userData.password, userData.password_hash).then( (response) => {
+            // Redirect the user to the admin backend
+            if (response === true){
+                res.redirect('admin/dashboard');
+            } else {
+                res.redirect('admin/login', {
+                    alertBanner: 'error'
+                });
+            }
+        }).catch( (error) => {
+            res.redirect('login');
+        });
     }).catch( (error) => {
         console.log(error);
     });
@@ -152,16 +119,8 @@ router.post('/admin/albums', (req, res) => {
         location: req.body.album.location
     };
 
-    // Get the current date
-    const currentTime = new Date();
-
-    // Extract the month and correct the value since months from the Date object start at 0
-    let currentMonth = currentTime.getMonth() + 1;
-    if (currentMonth < 10){
-        currentMonth = '0' + currentMonth;
-    }
-    // Final value of the current date in MySQL Format
-    const currentDate = `${currentTime.getFullYear()}-${currentMonth}-${currentTime.getDate()}`;
+    // Get todays date
+    currentDate = require('./models/todays-date');
 
     // Prepare database connection and query
     mysqlDB.initializeConnection(connectionInfo);
@@ -214,7 +173,7 @@ router.get('/admin/albums/:id', (req, res) => {
 
     }).then( (results) => {
         mysqlDB.closeConnection();
-        console.log(albumData);
+
         res.render('admin/editalbum', {
             albumData: albumData,
             albumImages: albumImages
@@ -225,24 +184,30 @@ router.get('/admin/albums/:id', (req, res) => {
 });
 
 router.get('/admin/images', (req, res) => {
-    const connection = mysql.createConnection(connectionInfo);
-    connection.connect();
+    const selectAllAlbumsQuery = `SELECT id, title FROM albums;`;
+    const selectAllImagesQuery = `SELECT i.id AS image_id, i.title AS image_title, i.description AS image_description, i.album_id, i.date_added AS image_date_added, a.id, a.title AS image_album FROM images i LEFT JOIN albums a ON i.album_id = a.id;
+    `;
 
-    const sqlQuery = `SELECT id, title FROM albums;`;
+    let allAlbums, allImages;
 
-    connection.query(sqlQuery, (error, results, fields) => {
-        if (error){
-            throw error;
-        } else {
-            const allAlbums = results;
+    mysqlDB.initializeConnection(connectionInfo);
+    mysqlDB.executeQuery(selectAllAlbumsQuery).then( (results) => {
+        allAlbums = results;
 
-            res.render('admin/images', {
-                allAlbums: allAlbums
-            });
-        }
+        return mysqlDB.executeQuery(selectAllImagesQuery);
+    }).then( (results) => {
+        allImages = results;
+
+    }).then( (results) => {
+        mysqlDB.closeConnection();
+
+        res.render('admin/images', {
+            allAlbums: allAlbums,
+            allImages: allImages
+        });
+    }).catch( (error) => {
+        console.log(error);
     });
-
-    // res.render('admin/images');
 });
 
 module.exports = router;
