@@ -28,3 +28,22 @@
         }
     }
 }
+
+@media screen and (max-width: 768px){
+    .featured-images{
+        height: auto;
+
+        &__container.flex--row{
+            flex-flow: column;
+        }
+
+        &__item{
+            width: 100%;
+            margin: 5px 0;
+
+            &--flex{
+                flex: 0 0 100%;
+            }
+        }
+    }
+}
