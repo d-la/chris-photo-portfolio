@@ -24,7 +24,7 @@
                 allImageData.forEach( (albumImage) => { 
                     
                     if ((count > 0) && (count < 6)){ %>
-                    <a href="/gallery/<%= albumImage.image_id %>" class="featured-images__item featured-images__item--flex">
+                    <a href="/gallery/image/<%= albumImage.image_id %>" class="featured-images__item featured-images__item--flex">
                         <img class="featured-images__img" src="<%= albumImage.src %>" alt="<%= albumImage.image_description %>" />
                     </a>
                 <% 

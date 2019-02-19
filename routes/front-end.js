@@ -46,7 +46,7 @@ router.get('/contact', (req, res) => {
     res.render('contact');
 });
 
-router.get('/gallery/:id', (req, res) => {
+router.get('/gallery/image/:id', (req, res) => {
     const galleryImageId = req.params.id;
     const selectAlbumImages = `SELECT i.id AS image_id, i.src, i.title AS image_title, i.description AS image_description, i.album_id, i.date_added AS image_date_added, a.id AS album_id, a.title AS album_title, a.location AS album_location FROM images i LEFT JOIN albums a ON i.album_id = a.id ORDER BY image_id = ${galleryImageId} DESC;`;
     

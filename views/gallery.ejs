@@ -32,7 +32,7 @@
             <% images.forEach( (image) => { %>
                 <div class="gallery__item">
                     <article class="gallery-image">
-                        <a href="/gallery/<%= image.image_id %>">
+                        <a href="/gallery/image/<%= image.image_id %>">
                             <img class="gallery-image__img" src="<%= image.src %>" alt="<%= image.image_description %>">
                         </a>
                         <h2 class="gallery-image__title"><%= image.image_title %></h2>
