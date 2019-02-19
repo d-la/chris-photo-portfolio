@@ -91,7 +91,37 @@ router.post('/login', (req, res) => {
 });
 
 router.get('/admin/dashboard', (req, res) => {
-    res.render('admin/dashboard');
+
+    mysqlDB.initializeConnection(connectionInfo);
+
+    const selectContactSubmissions = `SELECT id, first_name, last_name, email, phone_number, message, submission_date FROM contact_submissions;`;
+    const selectAlbums = `SELECT id, title, description, location, date_added FROM albums;`;
+    const selectImages = `SELECT id, src, title, description, album_id FROM images`;
+
+    let allContactSubmissions, allAlbums, allImages;
+
+    mysqlDB.executeQuery(selectContactSubmissions).then( (result) => {
+        allContactSubmissions = result;
+
+        return mysqlDB.executeQuery(selectAlbums);
+    }).then( (results) => {
+        allAlbums = results;
+        console.log(allAlbums);
+        return mysqlDB.executeQuery(selectImages);
+    }).then( (results) => {
+        allImages = results;
+
+        return mysqlDB.closeConnection();
+    }).then( (results) => {
+        // Render the view
+        res.render('admin/dashboard', {
+            allContactSubmissions: allContactSubmissions,
+            allAlbums: allAlbums,
+            allImages: allImages
+        });
+    }).catch( (error) => {
+        console.log(error);
+    });
 });
 
 router.get('/admin/albums', (req, res) => {
