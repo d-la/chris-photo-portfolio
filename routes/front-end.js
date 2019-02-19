@@ -48,19 +48,23 @@ router.get('/contact', (req, res) => {
 
 router.get('/gallery/:id', (req, res) => {
     const galleryImageId = req.params.id;
+    const selectAlbumImages = `SELECT i.id AS image_id, i.src, i.title AS image_title, i.description AS image_description, i.album_id, i.date_added AS image_date_added, a.id AS album_id, a.title AS album_title, a.location AS album_location FROM images i LEFT JOIN albums a ON i.album_id = a.id ORDER BY image_id = ${galleryImageId} DESC;`;
+    
+    // Placeholder for returned data
+    let allImageData;
 
-    // TODO: Implement logic to fetch data for the gallery image and it's album, if any,
-    // and return it to the page. This way we can display the gallery image and any other 
-    // images within the album
+    mysqlDB.initializeConnection(connectionInfo);
+    mysqlDB.executeQuery(selectAlbumImages).then( (results) => {
+        allImageData = results;
 
-    const galleryData = {
-        galleryImageId: galleryImageId,
-        galleryImageSrc: '/img/img4.jpg',
-        albumId: -1,
-        associatedGalleryImages: [2, 3, 4, 5, 6]
-    };
-
-    res.render('view', {galleryData: galleryData});
+        return mysqlDB.closeConnection();
+    }).then( (results) => {
+        res.render('view', {
+            allImageData: allImageData
+        });
+    }).catch( (error) => {
+        console.log(error);
+    });
 });
 
 module.exports = router;
