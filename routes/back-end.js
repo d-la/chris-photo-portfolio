@@ -106,7 +106,7 @@ router.get('/admin/dashboard', (req, res) => {
         return mysqlDB.executeQuery(selectAlbums);
     }).then( (results) => {
         allAlbums = results;
-        console.log(allAlbums);
+
         return mysqlDB.executeQuery(selectImages);
     }).then( (results) => {
         allImages = results;
@@ -184,6 +184,42 @@ router.post('/admin/albums', (req, res) => {
         res.redirect('albums');
     }).catch( (error) => {
         // TODO: Implement some logic to handle errors and display a message to the user
+        console.log(error);
+    });
+});
+
+// Route to edit an album
+router.get('/admin/albums/:id', (req, res) => {
+    const albumId = req.params.id;
+
+    // Variable to hold the data from the requested album and all images associated with the album
+    let albumData, albumImages;
+
+    // Prepare database connection and query
+    mysqlDB.initializeConnection(connectionInfo);
+
+    // This query just selects the album
+    const selectAlbumData = `SELECT id, title, description, location FROM albums WHERE id = ${albumId};`;
+
+    // This query selects all images within the album
+    const selectImagesFromAlbum = `SELECT id, src, title, description, date_added FROM images WHERE album_id = ${albumId};`;
+
+    mysqlDB.executeQuery(selectAlbumData).then( (results) => {
+        // console.log(results);
+        albumData = results;
+
+        return mysqlDB.executeQuery(selectImagesFromAlbum);
+    }).then( (results) => {
+        albumImages = results;
+
+    }).then( (results) => {
+        mysqlDB.closeConnection();
+        console.log(albumData);
+        res.render('admin/editalbum', {
+            albumData: albumData,
+            albumImages: albumImages
+        });
+    }).catch( (error) => {
         console.log(error);
     });
 });
