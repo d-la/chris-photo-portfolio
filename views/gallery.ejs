@@ -2,56 +2,40 @@
 <% include partials/navigation %>
     <main class="main">
 
-        <section class="albums">
-            <h1 class="albums__title">Albums</h1>
-            <ul class="albums__list flex flex--row">
-                <li class="albums__item">
-                    <a href="#" class="albums__link">
-                        All
-                        <span class="albums__slider"></span>
-                    </a>
-                </li>
-                <li class="albums__item">
-                    <a href="#" class="albums__link albums__link--active">
-                        Iceland
-                        <span class="albums__slider"></span>
-                    </a>
-                </li>
-                <li class="albums__item">
-                    <a href="#" class="albums__link">
-                        New York
-                        <span class="albums__slider"></span>
-                    </a>
-                </li>
-                <li class="albums__item">
-                    <a href="#" class="albums__link">
-                        People
-                        <span class="albums__slider"></span>
-                    </a>
-                </li>
-                <li class="albums__item">
-                    <a href="#" class="albums__link">
-                        Places
-                        <span class="albums__slider"></span>
-                    </a>
-                </li>
-                <li class="albums__item">
-                    <a href="#" class="albums__link">
-                        Things
-                        <span class="albums__slider"></span>
-                    </a>
-                </li>
-            </ul>
-        </section>
+        <% if (albums.length > 0) { %> 
+            <section class="albums">
+                <h1 class="albums__title">Albums</h1>
+                <ul class="albums__list flex flex--row">
+                    <li class="albums__item">
+                        <a href="#" class="albums__link">
+                            All
+                            <span class="albums__slider"></span>
+                        </a>
+                    </li>
+                    <% 
+                    albums.forEach( (album) => { 
+                    %>
+                    <li class="albums__item">
+                        <a href="#" class="albums__link">
+                            <%= album.title %>
+                            <span class="albums__slider"></span>
+                        </a>
+                    </li>
+                    <% 
+                    }); 
+                    %>
+                </ul>
+            </section>
+        <% } %>
 
         <section class="gallery grid grid--gallery grid--gap-1">
-            <% galleryImages.forEach( (galleryImage) => { %>
+            <% images.forEach( (image) => { %>
                 <div class="gallery__item">
                     <article class="gallery-image">
-                        <a href="/gallery/<%= galleryImage.id %>">
-                            <img class="gallery-image__img" src="<%= galleryImage.src %>" alt="<%= galleryImage.desc %>">
+                        <a href="/gallery/<%= image.id %>">
+                            <img class="gallery-image__img" src="<%= image.src %>" alt="<%= image.image_description %>">
                         </a>
-                        <h2 class="gallery-image__title"><%= galleryImage.title %></h2>
+                        <h2 class="gallery-image__title"><%= image.image_title %></h2>
                     </article>
                 </div>
             <% }); %>
