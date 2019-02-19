@@ -95,24 +95,23 @@ router.get('/admin/dashboard', (req, res) => {
 });
 
 router.get('/admin/albums', (req, res) => {
-
-    const connection = mysql.createConnection(connectionInfo);
-    connection.connect();
-
     const sqlQuery = `SELECT id, title, description, location, date_added FROM albums;`;
     
     let albums;
-    connection.query(sqlQuery, (error, results, fields) => {
-        if (error){
-            console.log(error);
-            throw error;
-        } else {
-            albums = results;
+    mysqlDB.initializeConnection(connectionInfo);
 
-            res.render('admin/albums', {albums: albums});
-        }
+    mysqlDB.executeQuery(sqlQuery).then( (results) => {
+        albums = results;
+
+        // Close the connection
+        mysqlDB.closeConnection();
+
+        // Render the page with necessary data
+        res.render('admin/albums', {albums: albums});
+    }).catch( (error) => {
+        // TODO: Implement some logic to handle errors and display a message to the user
+        console.log(error);
     });
-    connection.end();
 });
 
 router.post('/admin/albums', (req, res) => {
@@ -134,31 +133,29 @@ router.post('/admin/albums', (req, res) => {
     // Final value of the current date in MySQL Format
     const currentDate = `${currentTime.getFullYear()}-${currentMonth}-${currentTime.getDate()}`;
 
-    const connection = mysql.createConnection(connectionInfo);
-    connection.connect();
+    // Prepare database connection and query
+    mysqlDB.initializeConnection(connectionInfo);
+    const sqlQuery = `INSERT INTO albums (title, description, location, date_added) VALUES (${mysql.escape(album.title)}, ${mysql.escape(album.description)}, ${mysql.escape(album.location)}, '${currentDate}');`;
 
-    // const sqlQuery = "INSERT INTO albums (title, description, location, date_added) VALUES (" + connection.escape(album.title)  + ", " + connection.escape(album.description) + ". " + connection.escape(album.location) + ", " + currentDate + ")";
-    const sqlQuery = `INSERT INTO albums (title, description, location, date_added) VALUES (${connection.escape(album.title)}, ${connection.escape(album.description)}, ${connection.escape(album.location)}, '${currentDate}');`;
-    
-    connection.query(sqlQuery, (error, results, fields) => {
-        if (error){
-            throw error;
+    mysqlDB.executeQuery(sqlQuery).then( (results) => {
+
+        if (results.affectedRows == 1){
+            // Implement logic that will return a success banner to the front end
+            console.log('It worked');
         } else {
-            console.log(results);
-            // console.log(fields);
-
-            // const affectedRows = results[0].affectedRows;
-
-            // if (affectedRows === 1){
-            //     // Some session object to denote success
-            // } else {
-            //     // Some session object to denote error
-            // }
-
-            // res.redirect('/admin/albums');
+            // Logic to return an error banner to front end
+            console.log('It didnt work');
         }
+
+        // Close the connection
+        mysqlDB.closeConnection();
+
+        // Bring the user back to the same page
+        res.redirect('albums');
+    }).catch( (error) => {
+        // TODO: Implement some logic to handle errors and display a message to the user
+        console.log(error);
     });
-    connection.end();
 });
 
 router.get('/admin/images', (req, res) => {
