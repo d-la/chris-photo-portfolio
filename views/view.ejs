@@ -2,63 +2,28 @@
 <% include partials/navigation %>
     <main class="main">
         <section class="albums">
-            <h1 class="albums__title">Albums</h1>
-            <ul class="albums__list flex flex--row">
-                <li class="albums__item">
-                    <a href="#" class="albums__link">
-                        All
-                        <span class="albums__slider"></span>
-                    </a>
-                </li>
-                <li class="albums__item">
-                    <a href="#" class="albums__link albums__link--active">
-                        Iceland
-                        <span class="albums__slider"></span>
-                    </a>
-                </li>
-                <li class="albums__item">
-                    <a href="#" class="albums__link">
-                        New York
-                        <span class="albums__slider"></span>
-                    </a>
-                </li>
-                <li class="albums__item">
-                    <a href="#" class="albums__link">
-                        People
-                        <span class="albums__slider"></span>
-                    </a>
-                </li>
-                <li class="albums__item">
-                    <a href="#" class="albums__link">
-                        Places
-                        <span class="albums__slider"></span>
-                    </a>
-                </li>
-                <li class="albums__item">
-                    <a href="#" class="albums__link">
-                        Things
-                        <span class="albums__slider"></span>
-                    </a>
-                </li>
-            </ul>
+            <h1 class="albums__title">Album: <%= allImageData[0].album_title %></h1>
         </section>
 
         <section class="gallery-image">
-            <img class="gallery-image__img gallery-image__img--height-auto" src="<%= galleryData.galleryImageSrc %>" alt="Gallery Image Desc">
-            <h1>Nature Photo Title</h1>
-            <p>This was taken at sunset in Iceland</p>
-            <p>Published: 1/22/2019</p>
+            <img class="gallery-image__img gallery-image__img--height-auto" src="<%= allImageData[0].src %>" alt="Gallery Image Desc">
+            <h1><%= allImageData[0].image_title %></h1>
+            <p>
+                <i class="fa fa-map-marker"></i>
+                <%= allImageData[0].album_location %>
+            </p>
+            <p>Published: <%= allImageData[0].image_date_added %></p>
         </section>
 
         <section class="album">
             <h3>Check out other photos from the album:</h3>
 
             <div class="flex flex--row flex--nowrap" style="height:100%;">
-                <img class="album__item album__item--flex" src="<%= galleryData.galleryImageSrc %>" alt="Gallery Image Desc">
-                <img class="album__item album__item--flex" src="<%= galleryData.galleryImageSrc %>" alt="Gallery Image Desc">
-                <img class="album__item album__item--flex" src="<%= galleryData.galleryImageSrc %>" alt="Gallery Image Desc">
-                <img class="album__item album__item--flex" src="<%= galleryData.galleryImageSrc %>" alt="Gallery Image Desc">
-                <img class="album__item album__item--flex" src="<%= galleryData.galleryImageSrc %>" alt="Gallery Image Desc">
+                <% allImageData.forEach( (albumImage) => { %>
+                    <a href="/gallery/<%= albumImage.image_id %>" class="album__item album__item--flex">
+                        <img class="album__img" src="<%= albumImage.src %>" alt="<%= albumImage.image_description %>" />
+                    </a>
+                <% }); %>
             </div>
         </section>
     </main>
