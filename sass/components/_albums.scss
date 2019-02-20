@@ -47,3 +47,11 @@
         transition: width .4s ease;
     }
 }
+
+@media screen and (max-width: 768px){
+    .albums{
+        &__list.flex--row{
+            flex-flow: column;
+        }
+    }
+}

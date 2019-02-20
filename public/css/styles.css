@@ -215,6 +215,11 @@ body {
   transition: width 0.4s ease;
 }
 
+@media screen and (max-width: 768px) {
+  .albums__list.flex--row {
+    flex-flow: column;
+  }
+}
 .button {
   display: inline-block;
   position: relative;
@@ -375,6 +380,9 @@ body {
 }
 .footer__social i {
   margin: 0 0.35em;
+}
+.footer__link {
+  color: #000;
 }
 
 .form__group {
