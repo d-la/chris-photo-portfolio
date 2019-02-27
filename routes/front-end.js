@@ -4,20 +4,12 @@ let router = express.Router();
 let mysql = require('mysql'),
     mysqlDB = require('../models/MysqlDB.js');
 
-// const connectionInfo = {
-//     host:     'localhost',
-//     user:     'root',
-//     password: 'root',
-//     database: 'photo_blog',
-//     port: 8889
-// };
-
 const connectionInfo = {
-    host:     'den1.mysql1.gear.host',
-    user:     'chrisphotoblog',
-    password: 'Ff7J0?XJj45~',
-    database: 'chrisphotoblog',
-    port: 3306
+    host:     process.env.DB_HOST,
+    user:     process.env.DB_USER,
+    password: process.env.DB_PASS,
+    database: process.env.DB_NAME,
+    port: process.env.DB_PORT
 }
 
 // Root (index) page
