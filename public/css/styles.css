@@ -48,6 +48,7 @@ body {
   color: #2d2d2d;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  height: 100%;
 }
 
 .dropdown-menu {
@@ -219,13 +220,19 @@ body {
   width: 0%;
   transition: width 0.4s ease;
 }
+.albums__select {
+  display: none;
+}
 
 @media screen and (max-width: 768px) {
   .albums__list.flex--row {
-    flex-flow: column;
+    display: none;
   }
   .albums__item {
     margin: 0.15em 0;
+  }
+  .albums__select {
+    display: block;
   }
 }
 .button {
@@ -418,6 +425,7 @@ body {
 }
 .form__control--textarea {
   height: 8em;
+  padding: 0.625em;
 }
 
 .sidebar {
