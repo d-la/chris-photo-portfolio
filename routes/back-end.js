@@ -185,7 +185,7 @@ router.get('/admin/albums/:id', (req, res) => {
 
 router.get('/admin/images', (req, res) => {
     const selectAllAlbumsQuery = `SELECT id, title FROM albums;`;
-    const selectAllImagesQuery = `SELECT i.id AS image_id, i.title AS image_title, i.description AS image_description, i.album_id, i.date_added AS image_date_added, a.id, a.title AS image_album FROM images i LEFT JOIN albums a ON i.album_id = a.id;
+    const selectAllImagesQuery = `SELECT i.id AS image_id, i.title AS image_title, i.description AS image_description, i.album_id, i.date_added AS image_date_added, a.id AS album_id, a.title AS image_album FROM images i LEFT JOIN albums a ON i.album_id = a.id;
     `;
 
     let allAlbums, allImages;
@@ -208,6 +208,36 @@ router.get('/admin/images', (req, res) => {
     }).catch( (error) => {
         console.log(error);
     });
+});
+
+router.get('/admin/images/:id', (req, res) => {
+
+    const imageId = req.params.id;
+
+    const selectImageDataQuery = `SELECT i.id AS image_id, i.src, i.title AS image_title, i.description AS image_desc, i.album_id, a.id AS album_id, a.title AS album_title FROM images i RIGHT JOIN albums a ON i.album_id = a.id WHERE i.id = ${imageId};`;
+    const selectAllAlbums = `SELECT id, title FROM albums;`;
+    let imageData, albumData;
+
+    mysqlDB.initializeConnection(connectionInfo);
+    mysqlDB.executeQuery(selectImageDataQuery).then( (results) => {
+        imageData = results;
+
+        return mysqlDB.executeQuery(selectAllAlbums);
+    }).then( (results) => {
+        albumData = results;
+
+        return mysqlDB.closeConnection();
+    }).then( (results) => {
+
+        res.render('admin/editimage', {
+            imageData: imageData,
+            albumData: albumData
+        });
+    }).catch( (error) => {
+        console.log(error);
+    });
+
+
 });
 
 module.exports = router;
