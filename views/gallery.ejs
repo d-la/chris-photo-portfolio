@@ -46,7 +46,7 @@
         <section class="gallery grid grid--gallery grid--gap-1">
             <% images.forEach( (image) => { %>
                 <div class="gallery__item">
-                    <article class="gallery-image">
+                    <article class="gallery-image flex flex--row flex--wrap">
                         <a href="/gallery/image/<%= image.image_id %>">
                             <img class="gallery-image__img lazy" src="/img/blurred_image.jpg" data-src="<%= image.src %>" alt="<%= image.image_description %>">
                         </a>

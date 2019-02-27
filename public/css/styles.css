@@ -77,6 +77,12 @@ body {
   .flex--col-r {
     flex-direction: column-reverse;
   }
+  .flex--wrap {
+    flex-wrap: wrap;
+  }
+  .flex--no-wrap {
+    flex-wrap: nowrap;
+  }
 }
 @supports (display: grid) {
   .grid {
@@ -389,6 +395,7 @@ body {
   font-size: 1em;
   text-align: left;
   font-weight: 400;
+  word-break: break-word;
 }
 .gallery-image__album {
   color: #777;
