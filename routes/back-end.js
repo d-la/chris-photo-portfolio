@@ -174,7 +174,7 @@ router.get('/admin/albums/:id', (req, res) => {
     }).then( (results) => {
         mysqlDB.closeConnection();
 
-        res.render('admin/editalbum', {
+        res.render('admin/edit-album', {
             albumData: albumData,
             albumImages: albumImages
         });
@@ -229,7 +229,7 @@ router.get('/admin/images/:id', (req, res) => {
         return mysqlDB.closeConnection();
     }).then( (results) => {
 
-        res.render('admin/editimage', {
+        res.render('admin/edit-image', {
             imageData: imageData,
             albumData: albumData
         });
