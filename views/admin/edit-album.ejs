@@ -12,7 +12,7 @@
                             Edit Album: <%= albumData[0].title %>
                         </div>
                         <div class="panel__body">
-                            <form action="/admin/albums" method="POST" enctype="application/x-www-form-urlencoded">
+                            <form action="/admin/albums/<%= albumData[0].id %>?_method=PUT" method="POST" enctype="application/x-www-form-urlencoded">
                                 <input type="hidden" name="album[id]" value="<%= albumData[0].id %>">
                                 <div class="form-group">
                                     <label for="album[title]" class="form-label">Album Title</label>
