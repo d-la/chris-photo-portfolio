@@ -5,13 +5,21 @@ let mysql = require('mysql'),
     bcrypt = require('bcrypt'),
     mysqlDB = require('../models/MysqlDB.js');
 
+// const connectionInfo = {
+//     host:     'localhost',
+//     user:     'root',
+//     password: 'root',
+//     database: 'photo_blog',
+//     port: 8889
+// };
+
 const connectionInfo = {
-    host:     'localhost',
-    user:     'root',
-    password: 'root',
-    database: 'photo_blog',
-    port: 8889
-};
+    host:     'den1.mysql1.gear.host',
+    user:     'chrisphotoblog',
+    password: 'Ff7J0?XJj45~',
+    database: 'chrisphotoblog',
+    port: 3306
+}
 
 // Show the login view
 router.get('/login', (req, res) => {

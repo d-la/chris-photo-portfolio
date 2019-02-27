@@ -52,12 +52,19 @@ app.post('/admin/images', upload.single('albumImage'), (req, res) => {
     
     mysqlDB = require('./models/MysqlDB.js');
 
+    // mysqlDB.initializeConnection({
+    //     host:     'localhost',
+    //     user:     'root',
+    //     password: 'root',
+    //     database: 'photo_blog',
+    //     port: 8889
+    // });
     mysqlDB.initializeConnection({
-        host:     'localhost',
-        user:     'root',
-        password: 'root',
-        database: 'photo_blog',
-        port: 8889
+        host:     'den1.mysql1.gear.host',
+        user:     'chrisphotoblog',
+        password: 'Ff7J0?XJj45~',
+        database: 'chrisphotoblog',
+        port: 3306
     });
 
     mysqlDB.executeQuery(insertImageDataQuery).then( (result) => {
@@ -75,7 +82,12 @@ app.post('/admin/images', upload.single('albumImage'), (req, res) => {
     });
 });
 
+let port = process.env.PORT || 80;
 
-app.listen(4200, 'localhost', () => {
+// app.listen(4200, 'localhost', () => {
+//     console.log('Server is running!');
+// });
+
+app.listen(port, () => {
     console.log('Server is running!');
 });
