@@ -50,7 +50,7 @@
                         <a href="/gallery/image/<%= image.image_id %>">
                             <img class="gallery-image__img lazy" src="/img/blurred_image.jpg" data-src="<%= image.src %>" alt="<%= image.image_description %>">
                         </a>
-                        <h2 class="gallery-image__title"><%= image.image_title %></h2>
+                        <h2 class="gallery-image__title"><%= image.image_title %> - <span class="gallery-image__album"><%= image.image_album %></span></h2>
                     </article>
                 </div>
             <% }); %>

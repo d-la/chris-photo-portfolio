@@ -373,6 +373,9 @@ body {
   text-align: left;
   font-weight: 400;
 }
+.gallery-image__album {
+  color: #777;
+}
 
 @media screen and (max-width: 1000px) and (min-width: 501px) {
   .gallery-image__img {

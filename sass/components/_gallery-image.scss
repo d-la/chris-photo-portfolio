@@ -1,9 +1,5 @@
 .gallery-image{
     position: relative;
-    // padding: 2em;
-    // background: #FFF;
-    // border-radius: 5px;
-    // border: 1px solid #d1d3d6;
 
     &__img{
         max-width: 100%;
@@ -26,8 +22,14 @@
         text-align: left;
         font-weight: 400;
     }
+
+    &__album{
+        color: #777;
+    }
 }
 
+// As screen size gets smaller, some images have greater default widths than others. Make sure all 
+// image widths are 100% to maintain same image size
 @media screen and (max-width: 1000px) and (min-width: 501px){
     .gallery-image{
 
