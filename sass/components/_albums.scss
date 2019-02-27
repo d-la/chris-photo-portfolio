@@ -53,5 +53,9 @@
         &__list.flex--row{
             flex-flow: column;
         }
+
+        &__item{
+            margin: .15em 0;
+        }
     }
 }
