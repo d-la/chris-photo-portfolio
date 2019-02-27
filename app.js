@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 let express = require('express'),
     bodyParser = require('body-parser')
     path = require('path'),
@@ -52,19 +54,12 @@ app.post('/admin/images', upload.single('albumImage'), (req, res) => {
     
     mysqlDB = require('./models/MysqlDB.js');
 
-    // mysqlDB.initializeConnection({
-    //     host:     'localhost',
-    //     user:     'root',
-    //     password: 'root',
-    //     database: 'photo_blog',
-    //     port: 8889
-    // });
     mysqlDB.initializeConnection({
-        host:     'den1.mysql1.gear.host',
-        user:     'chrisphotoblog',
-        password: 'Ff7J0?XJj45~',
-        database: 'chrisphotoblog',
-        port: 3306
+        host:     process.env.DB_HOST,
+        user:     process.env.DB_USER,
+        password: process.env.DB_PASS,
+        database: process.env.DB_NAME,
+        port: process.env.DB_PORT
     });
 
     mysqlDB.executeQuery(insertImageDataQuery).then( (result) => {
@@ -82,12 +77,6 @@ app.post('/admin/images', upload.single('albumImage'), (req, res) => {
     });
 });
 
-let port = process.env.PORT || 80;
-
-// app.listen(4200, 'localhost', () => {
-//     console.log('Server is running!');
-// });
-
-app.listen(port, () => {
+app.listen(process.env.APP_PORT, () => {
     console.log('Server is running!');
 });
