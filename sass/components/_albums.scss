@@ -46,16 +46,25 @@
         width: 0%;
         transition: width .4s ease;
     }
+
+    &__select{
+        display: none;
+    }
 }
 
 @media screen and (max-width: 768px){
     .albums{
         &__list.flex--row{
-            flex-flow: column;
+            display: none;
+            // flex-flow: column;
         }
 
         &__item{
             margin: .15em 0;
+        }
+
+        &__select{
+            display: block;
         }
     }
 }

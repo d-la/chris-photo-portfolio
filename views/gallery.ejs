@@ -26,16 +26,19 @@
                     %>
                 </ul>
 
-                <div class="form__group">
-                    <select name="" id="" class="form__control">
-                        <% 
-                        albums.forEach( (album) => {
-                        %>
-                        <option value="<%= album.id %>"><%= album.title %></option>
-                        <% 
-                        }); 
-                        %>
-                    </select>
+                <div class="albums__select">
+                    <div class="form__group">
+                        <select name="" id="" class="form__control">
+                            <option value="0">All</option>
+                            <% 
+                            albums.forEach( (album) => {
+                            %>
+                            <option value="<%= album.id %>"><%= album.title %></option>
+                            <% 
+                            }); 
+                            %>
+                        </select>
+                    </div>
                 </div>
             </section>
         <% } %>
