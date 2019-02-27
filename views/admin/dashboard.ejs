@@ -110,6 +110,35 @@
                     </div><!-- end .panel -->
                 </div><!-- end .col-lg-6 -->
             </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="panel">
+                        <div class="panel__header">
+                            Home Page Image
+                        </div>
+                        <div class="panel__body">
+                            <p>
+                                Current Image:
+                            </p>
+                            <img src="/img/img1.jpg" alt="Homepage image" class="img-thumbnail">
+                            <p>
+                                New Image:
+                            </p>
+
+                            <form action="">
+                                <div class="form-group">
+                                    <label for="homepage-image" class="form-label">Background Image</label>
+                                    <input type="file" name="homepage-image" class="form-control-file" required="required">
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn--black">Update Background Image</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </main>    
 <% include ./partials/footer  %>
