@@ -374,6 +374,16 @@ body {
   font-weight: 400;
 }
 
+@media screen and (max-width: 1000px) and (min-width: 501px) {
+  .gallery-image__img {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 500px) {
+  .gallery-image__img {
+    width: 100%;
+  }
+}
 .gallery {
   width: 100%;
 }
