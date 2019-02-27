@@ -9,7 +9,8 @@ let express = require('express'),
     bcrypt = require('bcrypt')
     fileUpload = require('express-fileupload'),
     fs = require('fs'),
-    multer = require('multer');
+    multer = require('multer'),
+    methodOverride = require('method-override');
 
 let frontEndRoutes = require('./routes/front-end'),
     backEndRoutes = require('./routes/back-end');
@@ -20,6 +21,9 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(expressSanitizer());
+
+// Use method-override to use PUT/DELETE requests
+app.use(methodOverride('_method'));
 
 // Application routes
 app.use(frontEndRoutes);
