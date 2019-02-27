@@ -25,7 +25,11 @@
                                         <tr>
                                             <td><%= image.image_title %></td>
                                             <td><%= image.image_description %></td>
-                                            <td><%= image.image_album %></td>
+                                            <td>
+                                                <a href="/admin/albums/<%= image.album_id %>">
+                                                    <%= image.image_album %>
+                                                </a>
+                                            </td>
                                             <td>
                                                 <a href="/admin/images/<%= image.image_id %>" class="btn btn--black">Edit</a>
                                             </td>
