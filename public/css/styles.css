@@ -130,6 +130,23 @@ body {
     margin-left: 0;
   }
 }
+.bio__title {
+  margin: 0 0 0.5em 0;
+}
+.bio__image-container {
+  display: block;
+  width: 10em;
+  height: 10em;
+  margin: 0 auto;
+}
+.bio__img {
+  width: 100%;
+  border-radius: 50%;
+}
+.bio__desc {
+  margin: 0.5em 0;
+}
+
 .main {
   display: block;
   max-width: 65em;

@@ -1,0 +1,21 @@
+.bio{
+    &__title{
+        margin: 0 0 .5em 0;
+    }
+
+    &__image-container{
+        display: block;
+        width: 10em;
+        height: 10em;
+        margin: 0 auto;
+    }
+
+    &__img{
+        width: 100%;
+        border-radius: 50%;
+    }
+    
+    &__desc{
+        margin: .5em 0;
+    }
+}
