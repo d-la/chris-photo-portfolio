@@ -183,10 +183,30 @@ router.get('/admin/albums/:id', (req, res) => {
     });
 });
 
+// Route to update an album
+router.put('/admin/albums/:id', (req, res) => {
+    const albumData = req.body.album;
+
+    const updateAlbumDataQuery = `UPDATE albums SET title = ${mysql.escape(albumData.title)}, description = ${mysql.escape(albumData.description)}, location = ${mysql.escape(albumData.location)} WHERE id = ${albumData.id};`;
+
+    mysqlDB.initializeConnection(connectionInfo);
+    mysqlDB.executeQuery(updateAlbumDataQuery).then( (results) => {
+        // Logic to return a flag to the user that shows the update was successful
+
+        return mysqlDB.closeConnection();
+    }).then( (results) => {
+        // Redirect the user
+
+        res.redirect(`admin/edit-album/${albumData.id}`);
+    }).catch( (error) => {
+        // Logic to return a flag to the user that shows the update was not successful
+    });
+});
+
+// Route to display all images in the system to an admin
 router.get('/admin/images', (req, res) => {
     const selectAllAlbumsQuery = `SELECT id, title FROM albums;`;
-    const selectAllImagesQuery = `SELECT i.id AS image_id, i.title AS image_title, i.description AS image_description, i.album_id, i.date_added AS image_date_added, a.id AS album_id, a.title AS image_album FROM images i LEFT JOIN albums a ON i.album_id = a.id;
-    `;
+    const selectAllImagesQuery = `SELECT i.id AS image_id, i.title AS image_title, i.description AS image_description, i.album_id, i.date_added AS image_date_added, a.id AS album_id, a.title AS image_album FROM images i LEFT JOIN albums a ON i.album_id = a.id;`;
 
     let allAlbums, allImages;
 
