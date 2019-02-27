@@ -16,7 +16,7 @@
                     albums.forEach( (album) => { 
                     %>
                     <li class="albums__item">
-                        <a href="#" class="albums__link">
+                        <a href="/albums/<%= album.id %>" class="albums__link">
                             <%= album.title %>
                             <span class="albums__slider"></span>
                         </a>
@@ -25,6 +25,18 @@
                     }); 
                     %>
                 </ul>
+
+                <div class="form__group">
+                    <select name="" id="" class="form__control">
+                        <% 
+                        albums.forEach( (album) => {
+                        %>
+                        <option value="<%= album.id %>"><%= album.title %></option>
+                        <% 
+                        }); 
+                        %>
+                    </select>
+                </div>
             </section>
         <% } %>
 
@@ -33,7 +45,7 @@
                 <div class="gallery__item">
                     <article class="gallery-image">
                         <a href="/gallery/image/<%= image.image_id %>">
-                            <img class="gallery-image__img" src="<%= image.src %>" alt="<%= image.image_description %>">
+                            <img class="gallery-image__img lazy" src="/img/blurred_image.jpg" data-src="<%= image.src %>" alt="<%= image.image_description %>">
                         </a>
                         <h2 class="gallery-image__title"><%= image.image_title %></h2>
                     </article>
@@ -42,5 +54,14 @@
         </section>
     </main>
 
+    <script src="/assets/yall/yall-2.2.1.min.js"></script>
+    <script>
+        // Lazy load images
+        document.addEventListener('DOMContentLoaded', () => {
+            yall({
+                observeChanges: true
+            });
+        });
+    </script>
 <% include partials/footer  %>
 <% include partials/ending-tags  %>
