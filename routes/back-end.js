@@ -197,7 +197,7 @@ router.put('/admin/albums/:id', (req, res) => {
     }).then( (results) => {
         // Redirect the user
 
-        res.redirect(`admin/edit-album/${albumData.id}`);
+        res.redirect(`/admin/albums/${albumData.id}`);
     }).catch( (error) => {
         // Logic to return a flag to the user that shows the update was not successful
     });
