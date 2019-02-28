@@ -81,6 +81,8 @@ app.post('/admin/images', upload.single('albumImage'), (req, res) => {
     });
 });
 
-app.listen(process.env.APP_PORT, () => {
+let port = process.env.PORT || 3000;
+
+app.listen(port, () => {
     console.log('Server is running!');
 });
