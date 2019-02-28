@@ -260,4 +260,25 @@ router.get('/admin/images/:id', (req, res) => {
 
 });
 
+// Route for handling image data updates
+router.put('/admin/images/:id', (req, res) => {
+    const imageData = req.body.image;
+    console.log(imageData);
+    const updateImageDataQuery = `UPDATE images SET title = ${mysql.escape(imageData.title)}, description = ${mysql.escape(imageData.description)}, album_id = ${mysql.escape(imageData.album)} WHERE id = ${imageData.id};`;
+
+    mysqlDB.initializeConnection(connectionInfo);
+    mysqlDB.executeQuery(updateImageDataQuery).then( (results) => {
+        // Logic to return a flag to the user that shows the update was successful
+
+        return mysqlDB.closeConnection();
+    }).then( (results) => {
+        // Redirect the user
+
+        res.redirect(`/admin/images/${imageData.id}`);
+    }).catch( (error) => {
+        // Logic to return a flag to the user that shows the update was not successful
+    });
+
+});
+
 module.exports = router;
