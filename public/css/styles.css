@@ -294,6 +294,20 @@ body {
   color: #FFF;
   font-weight: 600;
 }
+.button--success {
+  border-radius: 6px;
+  padding: 0.75em 3em;
+  background-color: #28a745;
+  border: 1px solid #28a745;
+  color: #FFF;
+}
+.button--fail {
+  border-radius: 6px;
+  padding: 0.75em 3em;
+  background-color: #dc3545;
+  border: 1px solid #dc3545;
+  color: #FFF;
+}
 .button:hover {
   transform: translateY(-3px);
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
@@ -625,7 +639,7 @@ body {
   background: linear-gradient(to right bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url("/img/img1.jpg");
   background-size: cover;
   background-position: center;
-  animation: fadeInOversized 2s linear;
+  animation: fadeIn 0.9s linear;
 }
 .welcome__message {
   position: relative;
