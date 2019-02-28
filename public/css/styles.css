@@ -27,6 +27,20 @@
     transform: translateX(0);
   }
 }
+@keyframes fadeInOversized {
+  0% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
 *,
 *::after,
 *::before {
@@ -611,7 +625,7 @@ body {
   background: linear-gradient(to right bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url("/img/img1.jpg");
   background-size: cover;
   background-position: center;
-  animation: fadeIn 0.9s linear;
+  animation: fadeInOversized 2s linear;
 }
 .welcome__message {
   position: relative;

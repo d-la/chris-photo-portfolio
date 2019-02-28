@@ -7,7 +7,8 @@
     background-size: cover;
     background-position: center;
 
-    animation: fadeIn .9s linear;
+    // animation: fadeIn .9s linear;
+    animation: fadeInOversized 2s linear;
 
     &__message{
         position: relative;
