@@ -42,8 +42,30 @@ router.get('/gallery', (req, res) => {
     });
 });
 
+// Route for rendering the contact page
 router.get('/contact', (req, res) => {
     res.render('contact');
+});
+
+// Route for handling contact form submissions
+router.post('/contact', (req, res) => {
+    const contactData = req.body;
+    // Get MySQL formatted date time
+    
+    const currentDateTime = new Date().toJSON().slice(0, 19).replace('T', ' ');
+
+    const insertContactSubmissionQuery = `INSERT INTO contact_submissions (first_name, last_name, email, phone_number, message, submission_date) VALUES (${mysql.escape(contactData.firstName)}, ${mysql.escape(contactData.lastName)}, '${contactData.email}', ${mysql.escape(contactData.phoneNumber)}, ${mysql.escape(contactData.message)}, '${currentDateTime}');`;
+    
+    mysqlDB.initializeConnection(connectionInfo);
+    mysqlDB.executeQuery(insertContactSubmissionQuery).then( (results) => {
+        return mysqlDB.closeConnection();
+    }).then( (results) => {
+        // Send a true response to ajax so we can display the correct message to the user
+        res.send({response: true});
+    }).catch( (error) => {
+        // Send a false response to ajax so we can display the correct message to the user
+        res.send({response: false});
+    });
 });
 
 router.get('/gallery/image/:id', (req, res) => {

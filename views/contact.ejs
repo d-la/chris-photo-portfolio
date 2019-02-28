@@ -20,11 +20,15 @@
                 </div>
                 <div class="contact__form">
                     <h1>Contact Me</h1>
-                    <form action="/contact" method="POST" enctype="multipart/form-data" class="form">
+                    <form action="/contact" method="POST" enctype="application/x-www-form-urlencoded" class="form">
                         <div class="form__group">
-                            <label for="name" class="form__label">Name</label>
-                            <input type="text" name="name" class="form__control" required="required">
+                            <label for="firstName" class="form__label">First Name</label>
+                            <input type="text" name="firstName" class="form__control" required="required">
                         </div>
+                        <div class="form__group">
+                                <label for="lastName" class="form__label">Last Name</label>
+                                <input type="text" name="lastName" class="form__control" required="required">
+                            </div>
                         <div class="form__group">
                             <label for="email" class="form__label">Email</label>
                             <input type="email" name="email" class="form__control" required="required">
@@ -48,4 +52,5 @@
 
 <% include partials/footer  %>
 <% include partials/script-dependencies %>
+    <script src="/js/handle-contact-form.js"></script>
 <% include partials/ending-tags  %>
