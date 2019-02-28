@@ -22,8 +22,9 @@
                             Edit Image Data
                         </div>
                         <div class="panel__body">
-                            <form action="/admin/albums" method="POST" enctype="application/x-www-form-urlencoded">
-                                <input type="hidden" name="image[id]" value="<%= imageData[0].image_title %>">
+                            <form action="/admin/images/<%= imageData[0].image_id %>?_method=PUT" method="POST" enctype="application/x-www-form-urlencoded">
+                                <input type="hidden" name="image[id]" value="<%= imageData[0].image_id %>">
+                                <input type="hidden" value="<%= imageData[0].album_id %>">
                                 <div class="form-group">
                                     <label for="image[title]" class="form-label">Image Title</label>
                                     <input type="text" name="image[title]" class="form-control" value="<%= imageData[0].image_title %>" required="required">
@@ -36,7 +37,7 @@
                                     <label for="image[album]" class="form-label">Album</label>
                                     <select name="image[album]" class="form-control" required="required">
                                         <% albumData.forEach( (album) => {  
-                                            if (albumData.id === imageData[0].album_id){ %>
+                                            if (album.id === imageData[0].album_id){ %>
                                                 <option value="<%= album.id %>" selected><%= album.title %></option>
                                         <% 
                                             } else { %>
