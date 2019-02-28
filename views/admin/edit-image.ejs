@@ -24,7 +24,6 @@
                         <div class="panel__body">
                             <form action="/admin/images/<%= imageData[0].image_id %>?_method=PUT" method="POST" enctype="application/x-www-form-urlencoded">
                                 <input type="hidden" name="image[id]" value="<%= imageData[0].image_id %>">
-                                <input type="hidden" value="<%= imageData[0].album_id %>">
                                 <div class="form-group">
                                     <label for="image[title]" class="form-label">Image Title</label>
                                     <input type="text" name="image[title]" class="form-control" value="<%= imageData[0].image_title %>" required="required">
