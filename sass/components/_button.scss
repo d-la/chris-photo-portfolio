@@ -23,6 +23,22 @@
         font-weight: 600;
     }
 
+    &--success{
+        border-radius: 6px;
+        padding: .75em 3em;
+        background-color: #28a745;
+        border: 1px solid #28a745;
+        color: #FFF;
+    }
+
+    &--fail{
+        border-radius: 6px;
+        padding: .75em 3em;
+        background-color: #dc3545;
+        border: 1px solid #dc3545;
+        color: #FFF;
+    }
+
     &:hover{
         transform: translateY(-3px);
         box-shadow: 0 .5rem 1rem rgba($color-black, .2);
