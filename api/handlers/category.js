@@ -26,3 +26,36 @@ exports.allCategoryData = async function(req, res, next){
         });
     }
 }
+
+exports.insertCategory = async function(req, res, next){
+    try {
+        // Connect to database
+        mysqlDB.initializeConnection(connectionInfo);
+        
+        // Create query string
+        const insertCategoryQuery = `INSERT INTO category (category_title, category_desc) VALUES (${mysql.escape(req.body.title)}, ${mysql.escape(req.body.desc)});`;
+        
+        // Execute query
+        let response = await mysqlDB.executeQuery(insertCategoryQuery);
+
+        // If the insertion was successful, return the data that was inserted
+        if (response.insertId){
+            res.status(200).json({
+                category_id: response.insertId,
+                category_title: req.body.title,
+                category_desc: req.body.desc
+            });
+        } else {
+            return next({
+                status: 400,
+                message: 'Unable to insert new category'
+            });
+        }
+
+    } catch (error) {
+        return next({
+            status: 400,
+            message: 'Unable to insert new category'
+        });
+    }
+}
