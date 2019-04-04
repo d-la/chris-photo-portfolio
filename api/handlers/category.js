@@ -43,7 +43,8 @@ exports.insertCategory = async function(req, res, next){
             res.status(200).json({
                 category_id: response.insertId,
                 category_title: req.body.title,
-                category_desc: req.body.desc
+                category_desc: req.body.desc,
+                status: true
             });
         } else {
             return next({
@@ -56,6 +57,39 @@ exports.insertCategory = async function(req, res, next){
         return next({
             status: 400,
             message: 'Unable to insert new category'
+        });
+    }
+}
+
+exports.deleteCategory = async function(req, res, next){
+    try {
+
+        // Connect to database
+        mysqlDB.initializeConnection(connectionInfo);
+
+        // Create query string to delete category by id
+        const deleteCategoryQuery = `DELETE FROM category WHERE category_id = ${req.body.id}`;
+
+        // Execute Query
+        let response = await mysqlDB.executeQuery(deleteCategoryQuery);
+
+        // Return data
+        if (response.affectedRows === 1){
+            res.status(200).json({
+                status: true,
+                deleted_id: req.body.id
+            });
+        } else {
+            return next({
+                status: 400,
+                message: 'Unable to delete category'
+            });
+        }
+
+    } catch (error) {
+        return next({
+            status: 400,
+            message: 'Unable to delete category'
         });
     }
 }
