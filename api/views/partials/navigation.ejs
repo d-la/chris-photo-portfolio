@@ -9,9 +9,14 @@
     </a>
 
     <ul class="nav__list">
-        <li class="nav__item">
+        <% allCategories.forEach( (category) => { %>
+                <li class="nav__item">
+                    <a href="/">Test</a>
+                </li>
+        <% }); %>
+        <!--<li class="nav__item">
             <a href="/gallery" class="nav__links">Gallery</a>
-        </li>
+        </li>-->
         <li class="nav__item">
             <a href="/contact" class="nav__links">Contact</a>
         </li>
