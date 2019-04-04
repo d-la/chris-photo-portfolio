@@ -93,3 +93,24 @@ exports.deleteCategory = async function(req, res, next){
         });
     }
 }
+
+exports.getCategoryData = async function(req, res, next){
+    try {
+
+        // Connect to database
+        mysqlDB.initializeConnection(connectionInfo);
+
+        // Create query to select category data
+        // const selectCategoryData = `SELECT c.category_id, c.category_title, c.category_desc, s.subcategory_id, s.subcategory_title, s.subcategory_desc, p.photo_id, p.photo_title, p.photo_desc, p.photo_src FROM category c INNER JOIN subcategory s ON c.category_id = s.subcategory_id RIGHT JOIN photo p ON p.subcategory_id = s.subcategory_id WHERE c.category_id = ${req.body.id};`
+        const selectCategoryData = `SELECT category_id, category_title, category_desc FROM category WHERE category_id = ${req.params.id};`;
+
+        let response = await mysqlDB.executeQuery(selectCategoryData);
+        
+        res.status(200).json(response);
+    } catch (error) {
+        return next({
+            status: 400,
+            message: 'Unable to retrieve category data'
+        });
+    }
+}
