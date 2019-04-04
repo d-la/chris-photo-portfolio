@@ -11,6 +11,9 @@ API Structure
         </thead>
         <tbody>
             <tr>
+                <td colspan="3">CATEGORY</td>   
+            </tr>
+            <tr>
                 <td>GET</td>
                 <td>/api/category</td>
                 <td>Lists all categories</td>
@@ -36,6 +39,9 @@ API Structure
                 <td>Deletes a specific category (ALSO DELETES ALL SUB CATEGORIES AND PHOTOS ASSOCIATED)</td>
             </tr>
             <tr>
+                <td colspan="3">SUBCATEGORIES</td>   
+            </tr>
+            <tr>
                 <td>GET</td>
                 <td>/api/subcategory</td>
                 <td>Lists all subcategories</td>
@@ -59,6 +65,9 @@ API Structure
                 <td>DELETE</td>
                 <td>/api/subcategory/:id</td>
                 <td>Deletes a specific subcategory (ALSO DELETES ALL PHOTOS ASSOCIATED)</td>
+            </tr>
+            <tr>
+                <td colspan="3">PHOTOS</td>   
             </tr>
             <tr>
                 <td>GET</td>
