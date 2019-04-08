@@ -65,3 +65,36 @@ exports.selectSpecificSubCategory = async function(req, res, next){
         });
     }
 }
+
+exports.updateSpecificSubCategory = async function(req, res, next){
+    try {
+
+        // Connect to the database
+        mysqlDB.initializeConnection(connectionInfo);
+
+        const updateSpecificSubCategory = `UPDATE subcategory SET subcategory_title = ${mysql.escape(req.body.title)}, subcategory_desc = ${mysql.escape(req.body.desc)}, category_id = ${req.body.category_id} WHERE subcategory_id = ${req.params.id};`
+
+        let response = await mysqlDB.executeQuery(updateSpecificSubCategory);
+
+        if (response.affectedRows === 1){
+            res.status(200).json({
+                status: true,
+                subcateogry_id: req.params.id,
+                subcategory_title: req.body.title,
+                subcategory_desc: req.body.desc,
+                category_id: req.body.category_id
+            });
+        } else {
+            return next({
+                status: 400,
+                message: 'Unable to update subcategory data'
+            });
+        }
+
+    } catch (error) {
+        return next({
+            status: 400,
+            message: 'Unable to update subcategory data'
+        });
+    }
+}
