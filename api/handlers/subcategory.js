@@ -38,8 +38,7 @@ exports.insertNewSubCategory = async function(req, res, next){
         let response = await mysqlDB.executeQuery(insertSubCategory);
         
         // Return that data via JSON
-        res.status(200).json(categoryData);
-        console.log(response);
+        res.status(200).json(response);
     } catch (error) {
         return next({
             status: 400,
@@ -95,6 +94,34 @@ exports.updateSpecificSubCategory = async function(req, res, next){
         return next({
             status: 400,
             message: 'Unable to update subcategory data'
+        });
+    }
+}
+
+exports.deleteSubCategory = async function(req, res, next){
+    try {
+         // Connect to the database
+        mysqlDB.initializeConnection(connectionInfo);
+
+        const deleteSubCategory = `DELETE FROM subcategory WHERE subcategory_id = ${req.body.id};`
+
+        let response = await mysqlDB.executeQuery(deleteSubCategory);
+
+        if (response.affectedRows === 1){
+            res.status(200).json({
+                status: true,
+                deleted_id: req.body.id
+            });
+        } else {
+            return next({
+                status: 400,
+                message: 'Unable to delete subcategory'
+            });
+        }
+    } catch (error) {
+        return next({
+            status: 400,
+            message: 'Unable to delete subcategory'
         });
     }
 }
