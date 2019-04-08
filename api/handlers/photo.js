@@ -45,3 +45,20 @@ exports.insertPhoto = async function(req, res, next){
         });
     }
 }
+
+exports.selectSpecificPhoto = async function(req, res, next){
+    try {
+        mysqlDB.initializeConnection(connectionInfo);
+
+        const selectSpecificPhoto = `SELECT photo_id, photo_title, photo_desc, photo_src, date_added, subcategory_id FROM photo WHERE photo_id = ${req.params.id};`;
+
+        let photoData = await mysqlDB.executeQuery(selectSpecificPhoto);
+
+        res.status(200).json(photoData);
+    } catch (error) {
+        return next({
+            status: 400,
+            message: 'Unable to select specific photo'
+        });
+    }
+}
