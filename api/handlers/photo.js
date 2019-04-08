@@ -79,3 +79,20 @@ exports.updateSpecificPhoto = async function(req, res, next){
         });
     }
 }
+
+exports.deletePhoto = async function(req, res, next){
+    try {
+        mysqlDB.initializeConnection(connectionInfo);
+
+        const deletePhoto = `DELETE FROM photo WHERE photo_id = ${req.body.photo_id};`;
+
+        let photoData = await mysqlDB.executeQuery(deletePhoto);
+
+        res.status(200).json(photoData);
+    } catch (error) {
+        return next({
+            status: 400,
+            message: 'Unable to select specific photo'
+        });
+    }
+}
