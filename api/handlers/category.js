@@ -15,7 +15,7 @@ exports.allCategoryData = async function(req, res, next){
         // Connect to the database
         mysqlDB.initializeConnection(connectionInfo);
         // Select all sub categories and photos in a category
-        const selectCategoryDataQuery = `SELECT category_id, category_title, category_desc FROM category;`;
+        const selectCategoryDataQuery = `SELECT category_id, category_title, category_desc, category_route FROM category;`;
         let categoryData = await mysqlDB.executeQuery(selectCategoryDataQuery);
         // Return that data via JSON
         res.status(200).json(categoryData);
