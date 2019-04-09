@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './css/styles.min.css';
-import Header from './components/header';
+import Navbar from './components/Navbar';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 class App extends Component {
 
@@ -15,7 +16,8 @@ class App extends Component {
 	componentWillMount(){
 		fetch('http://localhost:3000/api/category')
 			.then( data => data.json() )
-			.then( data => this.setState({categories: data}) );
+			.then( data => this.setState({categories: data}) )
+			.catch( error => console.log(error) );
 	}
 
 	render() {
@@ -23,17 +25,19 @@ class App extends Component {
 		const { categories } = this.state;
 
 		return (
-			<div>
-				<Header categories={categories} />
-				<div className="welcome">
-					<div className="welcome__message">
-						<h1>Welcome to Christopher Dinh's Photography Portfolio</h1>
-						<p>
-							<a href="/gallery" className="button button--green">View Gallery</a>
-						</p>
+			<Router>
+				<div>
+					<Navbar categories={categories} />
+					<div className="welcome">
+						<div className="welcome__message">
+							<h1>Welcome to Christopher Dinh's Photography Portfolio</h1>
+							<p>
+								<a href="/gallery" className="button button--green">View Gallery</a>
+							</p>
+						</div>
 					</div>
 				</div>
-			</div>
+			</Router>
 		);
 	}
 }
