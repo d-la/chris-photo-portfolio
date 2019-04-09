@@ -28,7 +28,7 @@ class Navbar extends Component{
 
         let categoryListItems = categories.map( category => (
             <li className="nav__item" key={category.category_id}>
-                <Link to="/contact" className="nav__links">
+                <Link to={category.category_route} className="nav__links">
                     { category.category_title }
                 </Link>
             </li>
