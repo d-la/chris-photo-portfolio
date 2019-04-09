@@ -5,7 +5,8 @@ let express = require('express'),
     mysql = require('mysql'),
     categoryRoutes = require('./routes/category'),
     subcategoryRoutes = require('./routes/subcategory');
-    photoRoutes = require('./routes/photo');
+    photoRoutes = require('./routes/photo'),
+    cors = require('cors');
 
 const errorHandler = require('./handlers/error');
 
@@ -13,9 +14,9 @@ const app = express();
 
 app.use(bodyParser.json());
 
-app.use('/api/category', categoryRoutes);
-app.use('/api/subcategory', subcategoryRoutes);
-app.use('/api/photo', photoRoutes);
+app.use('/api/category', cors(), categoryRoutes);
+app.use('/api/subcategory', cors(), subcategoryRoutes);
+app.use('/api/photo', cors(), photoRoutes);
 
 app.use( (req, res, next) => {
     let error = new Error('Not Found');
