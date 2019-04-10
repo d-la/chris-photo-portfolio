@@ -27,6 +27,33 @@ exports.allCategoryData = async function(req, res, next){
     }
 }
 
+exports.selectAssociatedCategoryData = async function(req, res, next){
+    try {
+
+        mysqlDB.initializeConnection(connectionInfo);
+
+        // Select all subcategories and photos where they share a common category id
+        const selectAllAssociatedData = `SELECT 
+                                            c.category_id, c.category_title, c.category_desc, 
+                                            s.subcategory_id, s.subcategory_title, s.subcategory_desc, s.category_id, 
+                                            p.photo_id, p.photo_title, p.photo_desc, p.photo_src 
+                                            FROM category c 
+                                            INNER JOIN subcategory s ON s.category_id = c.category_id
+                                            RIGHT JOIN photo p ON p.subcategory_id = s.subcategory_id 
+                                            WHERE c.category_id = ${req.params.id};`;
+        
+        let allAssociatedData = await mysqlDB.executeQuery(selectAllAssociatedData);
+
+        res.status(200).json(allAssociatedData);
+
+    } catch (error) {
+        return next({
+            status: 400,
+            message: 'Unable to connect to server'
+        });
+    }
+}
+
 exports.insertCategory = async function(req, res, next){
     try {
         // Connect to database
