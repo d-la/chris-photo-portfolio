@@ -36,7 +36,7 @@ exports.selectAssociatedCategoryData = async function(req, res, next){
         const selectAllAssociatedData = `SELECT 
                                             c.category_id, c.category_title, c.category_desc, 
                                             s.subcategory_id, s.subcategory_title, s.subcategory_desc, s.category_id, 
-                                            p.photo_id, p.photo_title, p.photo_desc, p.photo_src 
+                                            p.photo_id, p.photo_title, p.photo_desc, p.photo_src, p.date_added AS photo_date_added 
                                             FROM category c 
                                             INNER JOIN subcategory s ON s.category_id = c.category_id
                                             RIGHT JOIN photo p ON p.subcategory_id = s.subcategory_id 
