@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import './css/styles.min.css';
 import Navbar from './components/Navbar';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import Welcome from './components/Welcome';
+import Contact from './components/Contact';
 
 class App extends Component {
 
@@ -28,14 +30,8 @@ class App extends Component {
 			<Router>
 				<div>
 					<Navbar categories={categories} />
-					<div className="welcome">
-						<div className="welcome__message">
-							<h1>Welcome to Christopher Dinh's Photography Portfolio</h1>
-							<p>
-								<a href="/gallery" className="button button--green">View Gallery</a>
-							</p>
-						</div>
-					</div>
+					<Route exact path="/" component={Welcome} />
+					<Route path="/contact" component={Contact} />
 				</div>
 			</Router>
 		);
