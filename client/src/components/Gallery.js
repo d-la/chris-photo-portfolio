@@ -38,8 +38,7 @@ class Gallery extends Component{
                     data,
                     categoryName,
                     subCategoryList
-                })
-                console.log(this.state.data);
+                });
             })
             .catch( error => console.log(error) );
     }
