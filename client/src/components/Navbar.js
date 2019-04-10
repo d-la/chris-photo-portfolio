@@ -23,16 +23,16 @@ class Navbar extends Component{
 
     render(){
 
-        const { categories } = this.props;
+        // const { categories } = this.props;
         const { navbarClass } = this.state;
 
-        let categoryListItems = categories.map( category => (
-            <li className="nav__item" key={category.category_id}>
-                <Link to={category.category_route} className="nav__links">
-                    { category.category_title }
-                </Link>
-            </li>
-        ));
+        // let categoryListItems = categories.map( category => (
+        //     <li className="nav__item" key={category.category_id}>
+        //         <Link to={category.category_route} className="nav__links">
+        //             { category.category_title }
+        //         </Link>
+        //     </li>
+        // ));
 
         return(
             <nav className="nav">
@@ -46,7 +46,15 @@ class Navbar extends Component{
                 </Link>
 
                 <ul className={navbarClass}>
-                    { categoryListItems }
+                    <li className="nav__item">
+                        <Link to="/people-ive-met" className="nav__links">People I've Met</Link>
+                    </li>
+                    <li className="nav__item">
+                        <Link to="/the-world-around-me" className="nav__links">The World Around Me</Link>
+                    </li>
+                    <li className="nav__item">
+                        <Link to="/on-the-road" className="nav__links">On The Road</Link>
+                    </li>
                     <li className="nav__item">
                         <Link to="/contact" className="nav__links">Contact</Link>
                     </li>
