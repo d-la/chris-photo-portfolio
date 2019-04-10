@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import SubCategories from './SubCategories';
+import GalleryGrid from './GalleryGrid';
 
 
 class Gallery extends Component{
@@ -45,33 +46,14 @@ class Gallery extends Component{
 
     render(){
 
-        const { categoryName, subCategoryList } = this.state;
+        const { categoryName, subCategoryList, data } = this.state;
 
         return(
             <main className="main">
                 <section className="albums">
                     <h1 className="albums__title">{ categoryName }</h1>
                     <SubCategories subCategoryTitles={subCategoryList} />
-                    
-                    <div className="albums__select">
-                        <div className="form__group">
-                            <select name="" id="" className="form__control">
-                                <option value="0">All</option>
-                                <option value="1">Something</option>
-                            </select>
-                        </div>
-                    </div>
-                </section>
-
-                <section className="gallery grid grid--gallery grid--gap-1">
-                    <div className="gallery__item">
-                        <article className="gallery-image flex flex--row flex--wrap">
-                            <a href="/gallery/image/">
-                                <img className="gallery-image__img lazy" src="/img/blurred_image.jpg" data-src="Test" alt="Test" />
-                            </a>
-                            <h2 className="gallery-image__title">Hello - <span className="gallery-image__album">Some Stuff</span></h2>
-                        </article>
-                    </div>
+                    <GalleryGrid data={data} />
                 </section>
             </main>
         )
