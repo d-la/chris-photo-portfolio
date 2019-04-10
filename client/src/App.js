@@ -4,35 +4,18 @@ import Navbar from './components/Navbar';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Welcome from './components/Welcome';
 import Contact from './components/Contact';
+import Gallery from './components/Gallery';
 
 class App extends Component {
-
-	constructor(props){
-		super(props);
-
-		this.state = {
-			categories: []
-		}
-	}
-
-	componentWillMount(){
-		fetch('http://localhost:3000/api/category')
-			.then( data => data.json() )
-			.then( data => this.setState({categories: data}) )
-			.catch( error => console.log(error) );
-	}
-
 	render() {
-
-		const { categories } = this.state;
-
 		return (
 			<Router>
-				<div>
-					<Navbar categories={categories} />
-					<Route exact path="/" component={Welcome} />
-					<Route path="/contact" component={Contact} />
-				</div>
+				<Navbar />
+				<Route exact path="/" component={Welcome} />
+				<Route path="/contact" component={Contact} />
+				<Route path="/people-ive-met" render={(props) => <Gallery categoryId={1} />} />
+				<Route path="/the-world-around-me" render={(props) => <Gallery categoryId={2} />} />
+				<Route path="/on-the-road" render={(props) => <Gallery categoryId={3} />} />
 			</Router>
 		);
 	}
