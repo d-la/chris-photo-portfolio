@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import SubCategories from './SubCategories';
+
 
 class Gallery extends Component{
 
@@ -6,33 +8,51 @@ class Gallery extends Component{
         super(props);
 
         this.state = {
-
+            data: [],
+            categoryName: '',
+            subCategoryList: []
         };
+    }
+
+    componentDidMount(){
+        // Fetch subcategories and all associated photos from the category id
+        const { categoryId } = this.props;
+
+        fetch(`http://localhost:3000/api/category/all/${categoryId}`)
+            .then( data => data.json())
+            .then( data => {
+
+                let categoryName = (data[0].category_title) ? data[0].category_title : 'Loading...';
+
+                let subCategoryList = [];
+
+                // Loop through the returned data and extract only subcategory titles that are not already in the array
+                data.forEach( data => {
+                    if (subCategoryList.indexOf(data.subcategory_title) === -1){
+                        subCategoryList.push(data.subcategory_title);
+                    }
+                });
+
+                this.setState({ 
+                    data,
+                    categoryName,
+                    subCategoryList
+                })
+                console.log(this.state.data);
+            })
+            .catch( error => console.log(error) );
     }
 
     render(){
 
-        const { categoryId } = this.props;
+        const { categoryName, subCategoryList } = this.state;
 
         return(
             <main className="main">
                 <section className="albums">
-                    <h1 className="albums__title">Albums</h1>
-                    <ul className="albums__list flex flex--row">
-                        <li className="albums__item">
-                            <a href="/albums/" className="albums__link">
-                                All
-                                <span className="albums__slider"></span>
-                            </a>
-                        </li>
-                        <li className="albums__item">
-                            <a href="/albums/" className="albums__link">
-                                { categoryId }
-                                <span className="albums__slider"></span>
-                            </a>
-                        </li>
-                    </ul>
-
+                    <h1 className="albums__title">{ categoryName }</h1>
+                    <SubCategories subCategoryTitles={subCategoryList} />
+                    
                     <div className="albums__select">
                         <div className="form__group">
                             <select name="" id="" className="form__control">
