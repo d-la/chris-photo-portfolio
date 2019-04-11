@@ -461,6 +461,9 @@ body {
 .footer__social i {
   margin: 0 0.35em;
 }
+.footer__social i.youtube-red {
+  color: #c4302b;
+}
 .footer__link {
   color: #000;
 }
