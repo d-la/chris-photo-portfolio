@@ -6,7 +6,8 @@ class MysqlDB {
     // }
 
     initializeConnection( config ){
-        this.connection = mysql.createConnection( config );
+        // this.connection = mysql.createConnection( config );
+        this.connection = mysql.createPool( config );
     }
 
     // Return a promise when executing a query
