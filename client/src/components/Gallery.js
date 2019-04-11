@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import SubCategories from './SubCategories';
 import GalleryGrid from './GalleryGrid';
-
+import Footer from './Footer';
 
 class Gallery extends Component{
 
@@ -52,13 +52,16 @@ class Gallery extends Component{
         const { categoryName } = this.props;
 
         return(
-            <main className="main">
-                <section className="albums">
-                    <h1 className="albums__title">{ categoryName }</h1>
-                    <SubCategories subCategoryList={subCategoryList} selectSpecificSubCategory={this.selectSpecificSubCategory} />
-                    <GalleryGrid data={data} />
-                </section>
-            </main>
+            <div>
+                <main className="main">
+                    <section className="albums">
+                        <h1 className="albums__title">{ categoryName }</h1>
+                        <SubCategories subCategoryList={subCategoryList} selectSpecificSubCategory={this.selectSpecificSubCategory} />
+                        <GalleryGrid data={data} />
+                    </section>
+                </main>
+                <Footer />
+            </div>
         )
     }
 }
