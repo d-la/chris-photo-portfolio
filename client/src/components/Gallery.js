@@ -18,27 +18,38 @@ class Gallery extends Component{
         this.selectSpecificSubCategory = this.selectSpecificSubCategory.bind(this);
     }
 
-    componentDidMount(){
+    async componentDidMount(){
         // Fetch subcategories and all associated photos from the category id
         const { categoryId } = this.props;
 
         const allPhotosEndpoint = `http://localhost:3000/api/category/all/${categoryId}`;
         const allSubCategoriesEndpoint = `http://localhost:3000/api/subcategory/category/${categoryId}`;
 
-        Promise.all([
-            fetch(allPhotosEndpoint),
-            fetch(allSubCategoriesEndpoint),
-        ])
-        .then( ([allPhotos, allSubcategories]) => Promise.all([allPhotos.json(), allSubcategories.json()]))
-        .then( ([response1, response2]) => {
-            // console.log(response1, response2)
+        // Promise.all([
+        //     fetch(allPhotosEndpoint),
+        //     fetch(allSubCategoriesEndpoint),
+        // ])
+        // .then( ([allPhotos, allSubcategories]) => Promise.all([allPhotos.json(), allSubcategories.json()]))
+        // .then( ([response1, response2]) => {
+        //     // console.log(response1, response2)
 
-            this.setState({
-                data: response1,
-                subCategoryList: response2
-            });
-        })
-        .catch( (error) => console.log(error));
+        //     this.setState({
+        //         data: response1,
+        //         subCategoryList: response2
+        //     });
+        // })
+        // .catch( (error) => console.log(error));
+
+        try {
+            let [allPhotos, allSubcategories] = await Promise.all([
+                fetch(allPhotosEndpoint),
+                fetch(allSubCategoriesEndpoint)
+            ]);
+
+            console.log(allPhotos.json(), allSubcategories.json());
+        } catch (error) {
+            console.log(error);
+        }
 
     }
 
