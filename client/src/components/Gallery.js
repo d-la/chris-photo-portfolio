@@ -11,47 +11,51 @@ class Gallery extends Component{
         this.state = {
             data: [],
             categoryName: '',
-            subCategoryList: []
+            subCategoryList: [],
+            selectedSubCategory: -1
         };
+
+        this.selectSpecificSubCategory = this.selectSpecificSubCategory.bind(this);
     }
 
     componentDidMount(){
         // Fetch subcategories and all associated photos from the category id
         const { categoryId } = this.props;
 
-        fetch(`http://localhost:3000/api/category/all/${categoryId}`)
-            .then( data => data.json())
-            .then( data => {
+        const allPhotosEndpoint = `http://localhost:3000/api/category/all/${categoryId}`;
+        const allSubCategoriesEndpoint = `http://localhost:3000/api/subcategory/category/${categoryId}`;
 
-                let categoryName = (data[0].category_title) ? data[0].category_title : 'Loading...';
+        Promise.all([
+            fetch(allPhotosEndpoint),
+            fetch(allSubCategoriesEndpoint),
+        ])
+        .then( ([allPhotos, allSubcategories]) => Promise.all([allPhotos.json(), allSubcategories.json()]))
+        .then( ([response1, response2]) => {
+            // console.log(response1, response2)
 
-                let subCategoryList = [];
+            this.setState({
+                data: response1,
+                subCategoryList: response2
+            });
+        })
+        .catch( (error) => console.log(error));
 
-                // Loop through the returned data and extract only subcategory titles that are not already in the array
-                data.forEach( data => {
-                    if (subCategoryList.indexOf(data.subcategory_title) === -1){
-                        subCategoryList.push(data.subcategory_title);
-                    }
-                });
+    }
 
-                this.setState({ 
-                    data,
-                    categoryName,
-                    subCategoryList
-                });
-            })
-            .catch( error => console.log(error) );
+    selectSpecificSubCategory(selectedSubCategory){
+        this.setState({ selectedSubCategory });
     }
 
     render(){
 
-        const { categoryName, subCategoryList, data } = this.state;
+        const { subCategoryList, data } = this.state;
+        const { categoryName } = this.props;
 
         return(
             <main className="main">
                 <section className="albums">
                     <h1 className="albums__title">{ categoryName }</h1>
-                    <SubCategories subCategoryTitles={subCategoryList} />
+                    <SubCategories subCategoryList={subCategoryList} selectSpecificSubCategory={this.selectSpecificSubCategory} />
                     <GalleryGrid data={data} />
                 </section>
             </main>
