@@ -25,30 +25,20 @@ class Gallery extends Component{
         const allPhotosEndpoint = `http://localhost:3000/api/category/all/${categoryId}`;
         const allSubCategoriesEndpoint = `http://localhost:3000/api/subcategory/category/${categoryId}`;
 
-        // Promise.all([
-        //     fetch(allPhotosEndpoint),
-        //     fetch(allSubCategoriesEndpoint),
-        // ])
-        // .then( ([allPhotos, allSubcategories]) => Promise.all([allPhotos.json(), allSubcategories.json()]))
-        // .then( ([response1, response2]) => {
-        //     // console.log(response1, response2)
-
-        //     this.setState({
-        //         data: response1,
-        //         subCategoryList: response2
-        //     });
-        // })
-        // .catch( (error) => console.log(error));
-
         try {
             let [allPhotos, allSubcategories] = await Promise.all([
-                fetch(allPhotosEndpoint),
-                fetch(allSubCategoriesEndpoint)
+                fetch(allPhotosEndpoint).then( res => res.json()),
+                fetch(allSubCategoriesEndpoint).then( res => res.json())
             ]);
 
-            console.log(allPhotos.json(), allSubcategories.json());
+            this.setState({
+                data: allPhotos,
+                subCategoryList: allSubcategories
+            });
         } catch (error) {
             console.log(error);
+
+            // TODO: error logic
         }
 
     }
