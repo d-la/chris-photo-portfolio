@@ -11,7 +11,7 @@ const Footer = (props) => {
                     <i className="fa fa-instagram"></i>
                 </a>
                 <a href="https://www.youtube.com/channel/UCjlJ0X226cjB-HT4M7SAj1g" target="_blank" rel="noopener noreferrer" className="footer__link">
-                    <i className="fa fa-youtube"></i>
+                    <i className="fa fa-youtube-play"></i>
                 </a>
             </p>
         </footer>
