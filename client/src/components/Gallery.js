@@ -43,8 +43,22 @@ class Gallery extends Component{
 
     }
 
+    /**
+     * When the user clicks on a subcategory, change the DOM to show only photos from that subcategory
+     * 
+     * @param {int} selectedSubCategory the id of the subcategory the user selected
+     */
     selectSpecificSubCategory(selectedSubCategory){
-        this.setState({ selectedSubCategory });
+        const { data } = this.state;
+
+        let newPhotos = data.filter( data => parseInt(data.subcategory_id) === parseInt(selectedSubCategory) );
+        
+        this.setState({
+            data: newPhotos,
+            selectedSubCategory
+        });
+
+
     }
 
     render(){
