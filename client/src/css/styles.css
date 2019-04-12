@@ -233,15 +233,20 @@ body {
 .albums__item {
   flex: 0 0 15%;
   text-align: center;
+  border: 1px solid #000;
+  margin: 0 1%;
+  border-radius: 4px;
+}
+.albums__item:hover {
+  cursor: pointer;
+  border-color: #55c57a;
+  color: #55c57a;
 }
 .albums__link {
   position: relative;
   text-decoration: none;
   color: #000;
   transition: all 0.3s ease-in-out;
-}
-.albums__link:hover .albums__slider {
-  width: 100%;
 }
 .albums__link--active {
   border-bottom: 3px solid #55c57a;

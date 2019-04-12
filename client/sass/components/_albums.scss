@@ -18,6 +18,15 @@
     &__item{
         flex: 0 0 15%;
         text-align: center;
+        border: 1px solid #000;
+        margin: 0 1%;
+        border-radius: 4px;
+
+        &:hover{
+            cursor: pointer;
+            border-color: $color-green;
+            color: $color-green;
+        }
     }
 
     &__link{
@@ -25,10 +34,6 @@
         text-decoration: none;
         color: #000;
         transition: all .3s ease-in-out;
-
-        &:hover .albums__slider{
-            width: 100%;
-        }
 
         &--active{
             border-bottom: 3px solid $color-green;
