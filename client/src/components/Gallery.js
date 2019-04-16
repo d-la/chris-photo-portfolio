@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import SubCategories from './SubCategories';
 import GalleryGrid from './GalleryGrid';
 import Footer from './Footer';
@@ -67,7 +67,7 @@ class Gallery extends Component{
         const { categoryName } = this.props;
 
         return(
-            <div>
+            <Fragment>
                 <main className="main">
                     <section className="albums">
                         <h1 className="albums__title">{ categoryName }</h1>
@@ -76,7 +76,7 @@ class Gallery extends Component{
                     </section>
                 </main>
                 <Footer />
-            </div>
+            </Fragment>
         )
     }
 }
