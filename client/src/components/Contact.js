@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import ContactInfo from './ContactInfo';
 import ContactForm from './ContactForm';
 import Footer from './Footer';
@@ -7,7 +7,7 @@ class Contact extends Component{
 
     render(){
         return(
-            <div>
+            <Fragment>
                 <main className="main">
                     <section className="contact">
                         <div className="flex flex--row">
@@ -17,7 +17,7 @@ class Contact extends Component{
                     </section>
                 </main>
                 <Footer />
-            </div>
+            </Fragment>
         )
     }
 }
