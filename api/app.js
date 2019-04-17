@@ -6,6 +6,7 @@ let express = require('express'),
     categoryRoutes = require('./routes/category'),
     subcategoryRoutes = require('./routes/subcategory');
     photoRoutes = require('./routes/photo'),
+    contactRoutes = require('./routes/contact'),
     cors = require('cors');
 
 const errorHandler = require('./handlers/error');
@@ -17,6 +18,7 @@ app.use(bodyParser.json());
 app.use('/api/category', cors(), categoryRoutes);
 app.use('/api/subcategory', cors(), subcategoryRoutes);
 app.use('/api/photo', cors(), photoRoutes);
+app.use('/api/contact', cors(), contactRoutes);
 
 app.use( (req, res, next) => {
     let error = new Error('Not Found');
