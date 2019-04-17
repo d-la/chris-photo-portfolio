@@ -7,9 +7,6 @@ class Welcome extends Component{
             <div className="welcome">
 				<div className="welcome__message">
 					<h1>Welcome to Christopher Dinh's Photography Portfolio</h1>
-					<p>
-						<a href="/gallery" className="button button--green">View Gallery</a>
-					</p>
 				</div>
 			</div>
         )
