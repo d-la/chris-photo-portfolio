@@ -1,0 +1,48 @@
+.banner{
+    position: relative;
+    padding: .75em 1.25em;
+    margin: 1em 0;
+    border: 1px solid transparent;
+    border-radius: .25em;
+
+    &__close{
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 100%;
+        max-width: 10%;
+        width: 100%;
+        background: transparent;
+        border: transparent;
+        font-size: 1em;
+        opacity: .75em;
+
+        span{
+            color: #000;
+            opacity: .5;
+            font-weight: 700;
+            font-size: 1.5em;
+
+            &:hover{
+                cursor: pointer;
+                opacity: 1;
+            }
+        }
+    }
+
+    &--dismissible{
+        padding-right: 4em;
+    }
+
+    &--success{
+        background-color: #d4edda;
+        border-color: #c3e6cb;
+        color: #155724;
+    }
+
+    &--error{
+        color: #721c24;
+        background-color: #f8d7da;
+        border-color: #fdc6cb;
+    }
+}
