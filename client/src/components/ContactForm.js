@@ -20,6 +20,25 @@ class ContactForm extends Component{
         });
     };
 
+    handleSubmit = (e) => {
+        e.preventDefault();
+
+        let data = this.state;
+
+        fetch('http://localhost:3000/api/contact', {
+            crossDomain: true,
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then( data => data.json())
+        .then( data => console.log(data))
+        .catch( error => console.log(error));
+        
+    }
+
     render(){
 
         const { firstName, lastName, email, phoneNumber, message } = this.state;
@@ -27,7 +46,7 @@ class ContactForm extends Component{
         return(
             <div className="contact__form">
                 <h1>Contact Me</h1>
-                <form className="form">
+                <form className="form" onSubmit={this.handleSubmit}>
                     <div className="form__group">
                         <label htmlFor="firstName" className="form__label">First Name</label>
                         <input type="text" name="firstName" id="firstName" className="form__control" required="required" onChange={this.handleChange} value={firstName} />
