@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import AlertBanner from './AlertBanner';
 
 class ContactForm extends Component{
 
@@ -10,7 +11,8 @@ class ContactForm extends Component{
             lastName: '',
             email: '',
             phoneNumber: '',
-            message: ''
+            message: '',
+            submissionSuccess: ''
         }
     }
 
@@ -34,18 +36,45 @@ class ContactForm extends Component{
             body: JSON.stringify(data)
         })
         .then( data => data.json())
-        .then( data => console.log(data))
+        .then( data => {
+            // TODO: Logic to show user whether their message was inserted successfully
+            if (data.insertId) {
+                this.setState({
+                    firstName: '',
+                    lastName: '',
+                    email: '',
+                    phoneNumber: '',
+                    message: '',
+                    submissionSuccess: true
+                });
+            } else {
+                this.setState({
+                    submissionSuccess: true
+                });
+            }
+        })
         .catch( error => console.log(error));
         
     }
 
     render(){
 
-        const { firstName, lastName, email, phoneNumber, message } = this.state;
+        const { firstName, lastName, email, phoneNumber, message, submissionSuccess } = this.state;
+
+        let alertBanner;
+
+        if (submissionSuccess !== ''){
+            if (submissionSuccess === true){
+                alertBanner = <AlertBanner alertType="success" alertMessage="Contact information submitted successfully!" />
+            } else if (submissionSuccess === false){
+                alertBanner = <AlertBanner alertType="error" alertMessage="Unable to submit information successfully!" />
+            }
+        }
 
         return(
             <div className="contact__form">
                 <h1>Contact Me</h1>
+                {alertBanner}
                 <form className="form" onSubmit={this.handleSubmit}>
                     <div className="form__group">
                         <label htmlFor="firstName" className="form__label">First Name</label>
