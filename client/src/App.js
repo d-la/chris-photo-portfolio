@@ -7,6 +7,10 @@ import Contact from './components/Contact';
 import Gallery from './components/Gallery';
 import Login from './components/Login';
 
+// Admin backend
+import Admin from './containers/Admin';
+import Dashboard from './components/Dashboard';
+
 class App extends Component {
 	render() {
 		return (
@@ -17,6 +21,7 @@ class App extends Component {
 				<Route path="/the-world-around-me" render={(props) => <Gallery categoryId={2} categoryName="The World Around Me" />} />
 				<Route path="/on-the-road" render={(props) => <Gallery categoryId={3} categoryName="On the Road" />} />
 				<Route path="/login" component={Login} />
+				<Route path="/admin/dashboard" render={ (props) => <Admin mainComponent={<Dashboard />} /> } />
 			</Router>
 		);
 	}
