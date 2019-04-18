@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import Navbar from './Navbar';
 import SubCategories from './SubCategories';
 import GalleryGrid from './GalleryGrid';
 import Footer from './Footer';
@@ -68,6 +69,7 @@ class Gallery extends Component{
 
         return(
             <Fragment>
+                <Navbar />
                 <main className="main">
                     <section className="albums">
                         <h1 className="albums__title">{ categoryName }</h1>

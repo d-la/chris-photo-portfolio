@@ -11,7 +11,6 @@ class App extends Component {
 	render() {
 		return (
 			<Router>
-				<Navbar />
 				<Route exact path="/" component={Welcome} />
 				<Route path="/contact" component={Contact} />
 				<Route path="/people-ive-met" render={(props) => <Gallery categoryId={1} categoryName="People I've Met" />} />
