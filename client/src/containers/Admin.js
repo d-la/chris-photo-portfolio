@@ -13,8 +13,8 @@ class Admin extends Component {
             <Fragment>
                 <AdminNavbar />
                 <Sidebar />
-                <main class="admin">
-                    <h1 class="page-title">Dashboard</h1>
+                <main className="admin">
+                    <h1 className="page-title">Dashboard</h1>
 
                     { mainComponent }
                 </main>
