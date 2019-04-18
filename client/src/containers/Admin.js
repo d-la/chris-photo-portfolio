@@ -1,12 +1,24 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
+import Sidebar from '../components/Sidebar';
+import AdminNavbar from '../components/AdminNavbar';
+
 
 class Admin extends Component {
 
     render(){
+
+        const { mainComponent } = this.props;
+
         return(
-            <main className="admin">
-                <h1 className="page-title"></h1>
-            </main>
+            <Fragment>
+                <AdminNavbar />
+                <Sidebar />
+                <main class="admin">
+                    <h1 class="page-title">Dashboard</h1>
+
+                    { mainComponent }
+                </main>
+            </Fragment>
         )
     }
 }
