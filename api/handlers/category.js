@@ -48,7 +48,7 @@ exports.selectAssociatedCategoryData = async function(req, res, next){
                                             p.photo_id, p.photo_title, p.photo_desc, p.photo_src, p.subcategory_id, p.category_id, p.date_added AS photo_date_added 
                                             FROM subcategory s 
                                             RIGHT JOIN photo p ON s.subcategory_id = p.subcategory_id 
-                                            WHERE s.category_id = ${req.params.id} ORDER BY p.subcategory_id ASC;`
+                                            WHERE s.category_id = ${req.params.id} ORDER BY p.subcategory_id ASC, p.photo_id ASC;`
         
         let allAssociatedData = await mysqlDB.executeQuery(selectAllAssociatedData);
 
