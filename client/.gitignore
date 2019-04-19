@@ -25,3 +25,6 @@ yarn-error.log*
 # CSS map files
 src/css/styles.css.map
 src/css/styles.min.css.map
+
+# img files
+public/img/*
