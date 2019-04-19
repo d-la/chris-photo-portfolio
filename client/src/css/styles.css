@@ -225,6 +225,9 @@ body {
   font-size: 1.1em;
   font-weight: 400;
 }
+.albums__title:hover {
+  cursor: pointer;
+}
 .albums__list {
   list-style-type: none;
   justify-content: center;
