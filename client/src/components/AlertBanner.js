@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 
 class AlertBanner extends Component{
 
+    closeBanner = (e) => {
+
+    }
+
     render(){
 
         const { alertType, alertMessage } = this.props; 
@@ -14,6 +18,8 @@ class AlertBanner extends Component{
                 break;
             case 'error':
                 alertClass += 'banner--error';
+                break;
+            default:
                 break;
         }
 
