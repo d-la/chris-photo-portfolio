@@ -11,6 +11,7 @@ class Gallery extends Component{
 
         this.state = {
             data: [],
+            dataToDisplay: [],
             categoryName: '',
             subCategoryList: [],
             selectedSubCategory: -1
@@ -34,6 +35,7 @@ class Gallery extends Component{
 
             this.setState({
                 data: allPhotos,
+                dataToDisplay: allPhotos,
                 subCategoryList: allSubcategories
             });
         } catch (error) {
@@ -52,19 +54,32 @@ class Gallery extends Component{
     selectSpecificSubCategory(selectedSubCategory){
         const { data } = this.state;
 
-        let newPhotos = data.filter( data => parseInt(data.subcategory_id) === parseInt(selectedSubCategory) );
+        let photosToDisplay = data.filter( data => parseInt(data.subcategory_id) === parseInt(selectedSubCategory) );
         
         this.setState({
-            data: newPhotos,
+            dataToDisplay: photosToDisplay,
             selectedSubCategory
         });
 
 
     }
 
+    /**
+     * When the user clicks the category, reset the photos to display all photos from the category
+     */
+    resetSubCategories = () => {
+
+        const originalData = this.state.data;
+
+        this.setState({
+            dataToDisplay: originalData,
+            selectedSubCategory: -1
+        });
+    }
+
     render(){
 
-        const { subCategoryList, data } = this.state;
+        const { subCategoryList, dataToDisplay } = this.state;
         const { categoryName } = this.props;
 
         return(
@@ -72,9 +87,9 @@ class Gallery extends Component{
                 <Navbar />
                 <main className="main">
                     <section className="albums">
-                        <h1 className="albums__title">{ categoryName }</h1>
+                        <h1 className="albums__title" onClick={this.resetSubCategories}>{ categoryName }</h1>
                         <SubCategories subCategoryList={subCategoryList} selectSpecificSubCategory={this.selectSpecificSubCategory} />
-                        <GalleryGrid data={data} />
+                        <GalleryGrid data={dataToDisplay} />
                     </section>
                 </main>
                 <Footer />
