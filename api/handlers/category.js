@@ -19,6 +19,8 @@ exports.allCategoryData = async function(req, res, next){
         let categoryData = await mysqlDB.executeQuery(selectCategoryDataQuery);
         // Return that data via JSON
         res.status(200).json(categoryData);
+
+        await mysqlDB.closeConnection();
     } catch (error) {
         return next({
             status: 400,
@@ -33,19 +35,26 @@ exports.selectAssociatedCategoryData = async function(req, res, next){
         mysqlDB.initializeConnection(connectionInfo);
 
         // Select all subcategories and photos where they share a common category id
+        // const selectAllAssociatedData = `SELECT 
+        //                                     c.category_id, c.category_title, c.category_desc, 
+        //                                     s.subcategory_id, s.subcategory_title, s.subcategory_desc, s.category_id, 
+        //                                     p.photo_id, p.photo_title, p.photo_desc, p.photo_src, p.date_added AS photo_date_added 
+        //                                     FROM category c 
+        //                                     INNER JOIN subcategory s ON s.category_id = c.category_id
+        //                                     RIGHT JOIN photo p ON p.subcategory_id = s.subcategory_id 
+        //                                     WHERE c.category_id = ${req.params.id};`;
         const selectAllAssociatedData = `SELECT 
-                                            c.category_id, c.category_title, c.category_desc, 
-                                            s.subcategory_id, s.subcategory_title, s.subcategory_desc, s.category_id, 
-                                            p.photo_id, p.photo_title, p.photo_desc, p.photo_src, p.date_added AS photo_date_added 
-                                            FROM category c 
-                                            INNER JOIN subcategory s ON s.category_id = c.category_id
-                                            RIGHT JOIN photo p ON p.subcategory_id = s.subcategory_id 
-                                            WHERE c.category_id = ${req.params.id};`;
+                                            s.subcategory_id, s.subcategory_title, s.category_id, 
+                                            p.photo_id, p.photo_title, p.photo_desc, p.photo_src, p.subcategory_id, p.category_id, p.date_added AS photo_date_added 
+                                            FROM subcategory s 
+                                            RIGHT JOIN photo p ON s.subcategory_id = p.subcategory_id 
+                                            WHERE s.category_id = ${req.params.id} ORDER BY p.subcategory_id ASC;`
         
         let allAssociatedData = await mysqlDB.executeQuery(selectAllAssociatedData);
 
-        res.status(200).json(allAssociatedData);
+        await mysqlDB.closeConnection();
 
+        res.status(200).json(allAssociatedData);
     } catch (error) {
         return next({
             status: 400,
@@ -80,6 +89,7 @@ exports.insertCategory = async function(req, res, next){
             });
         }
 
+        await mysqlDB.closeConnection();
     } catch (error) {
         return next({
             status: 400,
@@ -113,6 +123,7 @@ exports.deleteCategory = async function(req, res, next){
             });
         }
 
+        await mysqlDB.closeConnection();
     } catch (error) {
         return next({
             status: 400,
@@ -134,6 +145,8 @@ exports.getCategoryData = async function(req, res, next){
         let response = await mysqlDB.executeQuery(selectCategoryData);
         
         res.status(200).json(response);
+
+        await mysqlDB.closeConnection();
     } catch (error) {
         return next({
             status: 400,
@@ -163,7 +176,8 @@ exports.updateCategory = async function(req, res, next){
                 message: 'Unable to update category data'
             });
         }
-
+        
+        await mysqlDB.closeConnection();
     } catch (error) {
         return next({
             status: 400,
