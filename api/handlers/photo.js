@@ -14,12 +14,13 @@ exports.selectAllPhotos = async function(req, res, next){
 
         mysqlDB.initializeConnection(connectionInfo);
 
-        const selectAllPhotos = `SELECT photo_id, photo_title, photo_desc, photo_src, date_added, subcategory_id FROM photo;`;
+        const selectAllPhotos = `SELECT photo_id, photo_title, photo_desc, photo_src, date_added, subcategory_id FROM photo ORDER BY subcategory_id ASC;`;
 
         let response = await mysqlDB.executeQuery(selectAllPhotos);
 
         res.status(200).json(response);
         
+        await mysqlDB.closeConnection();
     } catch (error) {
         return next({
             status: 400,
@@ -33,11 +34,13 @@ exports.insertPhoto = async function(req, res, next){
 
         mysqlDB.initializeConnection(connectionInfo);
 
-        const insertPhoto = `INSERT INTO photo (photo_title, photo_desc, photo_src, date_added, subcategory_id) VALUES (${mysql.escape(req.body.title)}, ${mysql.escape(req.body.desc)}, ${mysql.escape(req.body.src)}, NOW(), ${req.body.subcategory_id});`;
+        const insertPhoto = `INSERT INTO photo (photo_title, photo_desc, photo_src, date_added, subcategory_id, category_id) VALUES (${mysql.escape(req.body.title)}, ${mysql.escape(req.body.desc)}, ${mysql.escape(req.body.src)}, NOW(), ${req.body.subcategory_id}, ${req.body.category_id});`;
 
         let response = await mysqlDB.executeQuery(insertPhoto);
 
         res.status(200).json(response);
+
+        await mysqlDB.closeConnection();
     } catch (error) {
         return next({
             status: 400,
@@ -55,6 +58,8 @@ exports.selectSpecificPhoto = async function(req, res, next){
         let photoData = await mysqlDB.executeQuery(selectSpecificPhoto);
 
         res.status(200).json(photoData);
+
+        await mysqlDB.closeConnection();
     } catch (error) {
         return next({
             status: 400,
@@ -72,6 +77,8 @@ exports.updateSpecificPhoto = async function(req, res, next){
         let photoData = await mysqlDB.executeQuery(updateSpecificPhoto);
 
         res.status(200).json(photoData);
+
+        await mysqlDB.closeConnection();
     } catch (error) {
         return next({
             status: 400,
@@ -89,6 +96,8 @@ exports.deletePhoto = async function(req, res, next){
         let photoData = await mysqlDB.executeQuery(deletePhoto);
 
         res.status(200).json(photoData);
+
+        await mysqlDB.closeConnection();
     } catch (error) {
         return next({
             status: 400,
