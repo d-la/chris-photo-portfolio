@@ -2,13 +2,15 @@
     display: block;
     position: relative;
     padding: 1em 3em;
+    text-align: center;
 
     &__title{
-        text-align: center;
+        display: inline-block;
         font-size: 1.1em;
-        font-weight: 400;
+        font-weight: 500;
 
         &:hover{
+            color: $color-green;
             cursor: pointer;
         }
     }
