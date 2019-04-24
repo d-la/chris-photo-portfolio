@@ -2,13 +2,22 @@ import React, { Component } from 'react';
 
 class AlertBanner extends Component{
 
-    closeBanner = (e) => {
+    constructor(props){
+        super(props);
 
+        this.state = {
+            showBanner: true
+        };
+    }
+
+    closeBanner = (e) => {
+        this.setState({showBanner: false});
     }
 
     render(){
 
         const { alertType, alertMessage } = this.props; 
+        const { showBanner } = this.state;
 
         let alertClass = 'banner banner--dismissible ';
 
@@ -23,14 +32,19 @@ class AlertBanner extends Component{
                 break;
         }
 
-        return(
-            <div className={alertClass}> 
-                { alertMessage }
-                <button type="button" className="banner__close" data-dismiss="banner" aria-label="Close">
-                    <span>&times;</span>
-                </button>
-            </div>
-        )
+
+        if (showBanner){
+            return(
+                <div className={alertClass}> 
+                    { alertMessage }
+                    <button type="button" className="banner__close" data-dismiss="banner" aria-label="Close" onClick={this.closeBanner}>
+                        <span>&times;</span>
+                    </button>
+                </div>
+            )
+        } else {
+            return ( null );
+        }
     }
 }
 
