@@ -49,7 +49,7 @@ class ContactForm extends Component{
                 });
             } else {
                 this.setState({
-                    submissionSuccess: true
+                    submissionSuccess: false
                 });
             }
         })
@@ -67,7 +67,7 @@ class ContactForm extends Component{
             if (submissionSuccess === true){
                 alertBanner = <AlertBanner alertType="success" alertMessage="Contact information submitted successfully!" />
             } else if (submissionSuccess === false){
-                alertBanner = <AlertBanner alertType="error" alertMessage="Unable to submit information successfully!" />
+                alertBanner = <AlertBanner alertType="error" alertMessage="Unable to submit information!" />
             }
         }
 
