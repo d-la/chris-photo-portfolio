@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 
 class SubCategories extends Component{
 
@@ -17,6 +17,14 @@ class SubCategories extends Component{
         selectSpecificSubCategory(subCategoryId);
     }
 
+    selectSubCategoryFromOption = (e) => {
+        const { selectSpecificSubCategory } = this.props;
+
+        let subCategoryId = e.target.value;
+
+        selectSpecificSubCategory(subCategoryId);
+    }
+
     render(){
 
         const { subCategoryList } = this.props;
@@ -28,10 +36,25 @@ class SubCategories extends Component{
             </li>
         ));
 
+        let subCategoryOptions = subCategoryList.map( (data) => (
+            <option value={data.subcategory_id} key={data.subcategory_id}>{ data.subcategory_title }</option>
+        ));
+
         return(
-            <ul className="albums__list flex flex--row">
-                {subCategoryHtml}
-            </ul>
+            <Fragment>
+                <ul className="albums__list flex flex--row">
+                    {subCategoryHtml}
+                </ul>
+
+                <div className="albums__select">
+                    <div className="form__group">
+                        <select className="form__control" onChange={this.selectSubCategoryFromOption}>
+                            <option>Select Subcategory</option>
+                            { subCategoryOptions }
+                        </select>
+                    </div>
+                </div>
+            </Fragment>
         )
     }
 }
