@@ -27,14 +27,22 @@ class SubCategories extends Component{
 
     render(){
 
-        const { subCategoryList } = this.props;
+        const { subCategoryList, selectedSubCategory } = this.props;
 
-        let subCategoryHtml = subCategoryList.map( (data) => (
-            <li className="albums__item" key={data.subcategory_id} data-subcategory={data.subcategory_id} onClick={this.selectSubCategory}>
-                {data.subcategory_title}
-                <span className="albums__slider"></span>
-            </li>
-        ));
+        let subCategoryHtml = subCategoryList.map( (data) => {
+
+            let className = '';
+
+            if (parseInt(selectedSubCategory) === parseInt(data.subcategory_id)){
+                className = ' albums__item--active';
+            }
+
+            return (
+                <li className={`albums__item ${className}`} key={data.subcategory_id} data-subcategory={data.subcategory_id} onClick={this.selectSubCategory}>
+                    {data.subcategory_title}
+                </li>
+            )
+        });
 
         let subCategoryOptions = subCategoryList.map( (data) => (
             <option value={data.subcategory_id} key={data.subcategory_id}>{ data.subcategory_title }</option>
