@@ -79,7 +79,7 @@ class Gallery extends Component{
 
     render(){
 
-        const { subCategoryList, dataToDisplay } = this.state;
+        const { subCategoryList, dataToDisplay, selectedSubCategory } = this.state;
         const { categoryName } = this.props;
 
         return(
@@ -88,7 +88,7 @@ class Gallery extends Component{
                 <main className="main">
                     <section className="albums">
                         <h1 className="albums__title" onClick={this.resetSubCategories}>{ categoryName }</h1>
-                        <SubCategories subCategoryList={subCategoryList} selectSpecificSubCategory={this.selectSpecificSubCategory} />
+                        <SubCategories subCategoryList={subCategoryList} selectSpecificSubCategory={this.selectSpecificSubCategory} selectedSubCategory={selectedSubCategory} />
                         <GalleryGrid data={dataToDisplay} />
                     </section>
                 </main>
