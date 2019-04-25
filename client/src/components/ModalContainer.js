@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class Modal extends Component{
+class ModalContainer extends Component{
 
     render(){
         return(
@@ -10,4 +10,4 @@ class Modal extends Component{
     }
 }
 
-export default Modal;
+export default ModalContainer;
