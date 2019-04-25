@@ -692,7 +692,7 @@ body {
   border-color: #fdc6cb;
 }
 
-.modal {
+.modal-container {
   position: fixed;
   top: 0;
   left: 0;
