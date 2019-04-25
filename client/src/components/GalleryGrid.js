@@ -7,7 +7,9 @@ class GalleryGrid extends Component{
         super(props);
 
         this.state = {
-            isModalOpen: false
+            isModalOpen: false,
+            galleryImageSrc: '',
+            galleryImageAlt: ''
         };
 
         this.formatDate = this.formatDate.bind(this);
@@ -32,6 +34,9 @@ class GalleryGrid extends Component{
         return [year, month, day].join('-');
     }
 
+    /**
+     * General method to toggle the visibility state of the modal
+     */
     toggleModal = () => {
         const { isModalOpen } = this.state;
 
@@ -43,18 +48,39 @@ class GalleryGrid extends Component{
 
     }
 
+    /**
+     * Method for gallery grid images. Will find necessary data and set state to allow for viewing images on the modal and traversing
+     */
+    toggleModalAndSetModalData = (e) => {
+
+        let galleryImageData = {
+            src: e.target.getAttribute('src'),
+            alt: e.target.getAttribute('alt')
+        };
+        
+        const { isModalOpen } = this.state;
+
+        if (isModalOpen){
+            this.setState({isModalOpen: false});
+        } else {
+            this.setState({
+                isModalOpen: true,
+                galleryImageSrc: galleryImageData.src,
+                galleryImageAlt: galleryImageData.alt
+            });
+        }
+    }
+
     render(){
 
         const { data } = this.props;
-        const { isModalOpen } = this.state;
+        const { isModalOpen, galleryImageSrc, galleryImageAlt } = this.state;
 
         const gridImages = data.map( (data) => (
 
                 <div className="gallery__item" key={data.photo_id}>
                     <article className="gallery-image flex flex--row flex--wrap">
-                        {/* <a href={data.photo_src}> */}
-                            <img className="gallery-image__img lazy" src={data.photo_src} alt={data.photo_desc} onClick={this.toggleModal} />
-                        {/* </a> */}
+                        <img className="gallery-image__img lazy" src={data.photo_src} alt={data.photo_desc} onClick={this.toggleModalAndSetModalData} />
                         <h2 className="gallery-image__title">{data.photo_title} - <span className="gallery-image__album">{this.formatDate(data.photo_date_added)}</span></h2>
                     </article>
                 </div>
@@ -67,7 +93,7 @@ class GalleryGrid extends Component{
                 <section className="gallery grid grid--gallery grid--gap-1">
                     { gridImages }
                 </section>
-                <ModalContainer isModalOpen={isModalOpen} toggleModal={this.toggleModal} />
+                <ModalContainer isModalOpen={isModalOpen} galleryImageSrc={galleryImageSrc} galleryImageAlt={galleryImageAlt} toggleModal={this.toggleModal} />
             </Fragment>
         )
     }
