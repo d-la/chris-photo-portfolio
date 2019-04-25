@@ -12,12 +12,12 @@ class ModalContainer extends Component{
 
     render(){
 
-        const { isModalOpen } = this.props;
+        const { isModalOpen, galleryImageSrc, galleryImageAlt } = this.props;
 
         if ( isModalOpen ) {
             return(
                 <div className="modal-container" onClick={this.closeModal}>
-                    <Modal />
+                    <Modal galleryImageSrc={galleryImageSrc} galleryImageAlt={galleryImageAlt} />
                 </div>
             )
         } else { 
