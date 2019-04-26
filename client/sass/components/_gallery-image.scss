@@ -23,6 +23,7 @@
         text-align: left;
         font-weight: 400;
         word-break: break-word;
+        margin-top: .2em;
     }
 
     &__album{
@@ -32,16 +33,7 @@
 
 // As screen size gets smaller, some images have greater default widths than others. Make sure all 
 // image widths are 100% to maintain same image size
-@media screen and (max-width: 1000px) and (min-width: 501px){
-    .gallery-image{
-
-        &__img{
-            width: 100%;
-        }
-    }
-}
-
-@media screen and (max-width: 500px){
+@media screen and (max-width: 1000px){
     .gallery-image{
 
         &__img{
