@@ -286,6 +286,11 @@ body {
     display: block;
   }
 }
+@media screen and (max-width: 500px) {
+  .albums {
+    padding: 1em 0.5em;
+  }
+}
 .button {
   display: inline-block;
   position: relative;
@@ -439,17 +444,13 @@ body {
   text-align: left;
   font-weight: 400;
   word-break: break-word;
+  margin-top: 0.2em;
 }
 .gallery-image__album {
   color: #777;
 }
 
-@media screen and (max-width: 1000px) and (min-width: 501px) {
-  .gallery-image__img {
-    width: 100%;
-  }
-}
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 1000px) {
   .gallery-image__img {
     width: 100%;
   }
