@@ -692,13 +692,56 @@ body {
   border-color: #fdc6cb;
 }
 
+.modal {
+  position: relative;
+  top: 10%;
+  height: 80%;
+  left: 20%;
+  width: 60%;
+}
+.modal__close {
+  position: absolute;
+  top: -1em;
+  right: -1em;
+  font-size: 2em;
+  color: #FFF;
+}
+.modal__close:hover {
+  cursor: pointer;
+  opacity: 0.7;
+}
+.modal__prev {
+  position: absolute;
+  top: 45%;
+  left: -3%;
+  font-size: 2em;
+  color: #FFF;
+}
+.modal__next {
+  position: absolute;
+  top: 45%;
+  right: -3%;
+  font-size: 2em;
+  color: #FFF;
+}
+.modal__prev:hover, .modal__next:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
 .modal-container {
   position: fixed;
   top: 0;
   left: 0;
   height: 100%;
   width: 100%;
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.4);
+}
+.modal__img {
+  position: relative;
+  max-height: 100%;
+  max-width: 100%;
+  height: auto;
+  width: auto;
 }
 
 .welcome {
