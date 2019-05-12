@@ -16,9 +16,12 @@ exports.allSubCategories = async function(req, res, next){
         mysqlDB.initializeConnection(connectionInfo);
         // Select all sub categories and photos in a category
         const selectSubCategoryData = `SELECT subcategory_id, subcategory_title, subcategory_desc, category_id FROM subcategory;`;
+
         let categoryData = await mysqlDB.executeQuery(selectSubCategoryData);
         // Return that data via JSON
         res.status(200).json(categoryData);
+
+        await mysqlDB.closeConnection();
     } catch (error) {
         return next({
             status: 400,
@@ -39,6 +42,8 @@ exports.insertNewSubCategory = async function(req, res, next){
         
         // Return that data via JSON
         res.status(200).json(response);
+
+        await mysqlDB.closeConnection();
     } catch (error) {
         return next({
             status: 400,
@@ -57,6 +62,8 @@ exports.selectSpecificSubCategory = async function(req, res, next){
         let response = await mysqlDB.executeQuery(selectSpecificSubCategory);
 
         res.status(200).json(response);
+
+        await mysqlDB.closeConnection();
     } catch (error) {
         return next({
             status: 400,
@@ -90,6 +97,8 @@ exports.updateSpecificSubCategory = async function(req, res, next){
             });
         }
 
+        await mysqlDB.closeConnection();
+
     } catch (error) {
         return next({
             status: 400,
@@ -118,10 +127,32 @@ exports.deleteSubCategory = async function(req, res, next){
                 message: 'Unable to delete subcategory'
             });
         }
+
+        await mysqlDB.closeConnection();
     } catch (error) {
         return next({
             status: 400,
             message: 'Unable to delete subcategory'
         });
     }
+}
+
+exports.selectSubCategoriesFromCategory = async function(req, res, next){
+    try {
+        // Connect to the database
+        mysqlDB.initializeConnection(connectionInfo);
+
+        const selectSubCategoriesFromCategory = `SELECT subcategory_id, subcategory_title, subcategory_desc, category_id FROM subcategory WHERE category_id = ${req.params.id};`
+
+        let response = await mysqlDB.executeQuery(selectSubCategoriesFromCategory);
+
+        await mysqlDB.closeConnection();
+
+        res.status(200).json(response);
+   } catch (error) {
+       return next({
+           status: 400,
+           message: `Unable to select all subcategories that belong to category ${req.params.id}.`
+       });
+   }
 }
