@@ -60,3 +60,28 @@
         width: auto;
     }
 }
+
+@media screen and (max-width: 768px){
+    .modal{
+        left: 0;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &__close{
+            top: -1em;
+            right: 0;
+        }
+
+        &__prev{
+            left: 0;
+            z-index: 1;
+        }
+
+        &__next{
+            right: 0;
+            z-index: 1;
+        }
+    }
+}

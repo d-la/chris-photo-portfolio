@@ -745,6 +745,27 @@ body {
   width: auto;
 }
 
+@media screen and (max-width: 768px) {
+  .modal {
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .modal__close {
+    top: -1em;
+    right: 0;
+  }
+  .modal__prev {
+    left: 0;
+    z-index: 1;
+  }
+  .modal__next {
+    right: 0;
+    z-index: 1;
+  }
+}
 .welcome {
   display: block;
   position: relative;
