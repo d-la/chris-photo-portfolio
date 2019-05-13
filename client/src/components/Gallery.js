@@ -24,8 +24,10 @@ class Gallery extends Component{
         // Fetch subcategories and all associated photos from the category id
         const { categoryId } = this.props;
 
-        const allPhotosEndpoint = `http://localhost:3000/api/category/all/${categoryId}`;
-        const allSubCategoriesEndpoint = `http://localhost:3000/api/subcategory/category/${categoryId}`;
+        // const allPhotosEndpoint = `http://localhost:3000/api/category/all/${categoryId}`;
+        // const allSubCategoriesEndpoint = `http://localhost:3000/api/subcategory/category/${categoryId}`;
+        const allPhotosEndpoint = `/api/category/all/${categoryId}`;
+        const allSubCategoriesEndpoint = `/api/subcategory/category/${categoryId}`;
 
         try {
             let [allPhotos, allSubcategories] = await Promise.all([
