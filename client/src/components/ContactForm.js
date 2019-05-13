@@ -27,7 +27,7 @@ class ContactForm extends Component{
 
         let data = this.state;
 
-        fetch('http://localhost:3000/api/contact', {
+        fetch('/api/contact', {
             crossDomain: true,
             method: 'POST',
             headers: {
