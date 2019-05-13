@@ -705,7 +705,7 @@ body {
   top: -1em;
   right: -1em;
   font-size: 2em;
-  color: #FFF;
+  color: #777;
 }
 .modal__close:hover {
   cursor: pointer;
@@ -716,14 +716,14 @@ body {
   top: 45%;
   left: -3%;
   font-size: 2em;
-  color: #FFF;
+  color: #777;
 }
 .modal__next {
   position: absolute;
   top: 45%;
   right: -3%;
   font-size: 2em;
-  color: #FFF;
+  color: #777;
 }
 .modal__prev:hover, .modal__next:hover {
   opacity: 0.7;
@@ -735,7 +735,7 @@ body {
   left: 0;
   height: 100%;
   width: 100%;
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(255, 255, 255, 0.9);
 }
 .modal__img {
   position: relative;
